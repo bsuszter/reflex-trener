@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172943">
+  <title>Angol reflextréner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="mark">R<span>↗</span></span><div><strong>Reflextréner</strong><small>Angol, gondolkodás nélkül — lépésről lépésre</small></div></div>
+      <button id="settingsButton" class="quiet">Mentés és adatok</button>
+    </header>
+    <main>
+      <section class="hero"><div><span class="eyebrow">A1–A2 · első tananyag</span><h1>Ismerős gondolatok.<br><em>Biztos angol mondatok.</em></h1><p>Előbb megértjük a mintát, aztán gyakoroljuk. A régi mondatok mindig visszatérnek.</p></div><div class="hero-stat"><span id="dueCount">0</span><small>ismétlés vár rád</small></div></section>
+      <nav class="tabs" aria-label="Gyakorlási mód"><button data-tab="today" class="active">Mai gyakorlás</button><button data-tab="learn">Tanulás</button><button data-tab="free">Szabad gyakorlás</button><button data-tab="progress">Haladás</button></nav>
+      <div id="app" aria-live="polite"></div>
+    </main>
+    <footer>Apró lépések. Sok visszatérés. Tartós tudás.</footer>
+  </div>
+  <dialog id="settingsDialog"><div class="dialog-head"><h2>Mentés és adatok</h2><button id="closeSettings" class="quiet">Bezárás</button></div><p>A tanulási előzmények ezen a böngészőn tárolódnak. Másik eszközre exportálással viheted át őket. A felhőszinkron későbbi fejlesztés.</p><div class="actions"><button id="exportButton">Mentés letöltése</button><label class="button secondary">Mentés betöltése<input id="importInput" type="file" accept="application/json,.json" hidden></label></div><p id="settingsStatus" role="status"></p></dialog>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
