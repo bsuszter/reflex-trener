@@ -159,7 +159,7 @@
       "pattern": "be-tired",
       "form": "statement",
       "hu": "Fáradt vagyok.",
-      "situation": "Egy hosszú nap után elmondod, hogyan érzed magad.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Fáradt vagyok.” Fogalmazd meg angolul!",
       "answer": "I am tired.",
       "accepted": [
         "I'm tired."
@@ -170,7 +170,7 @@
       "pattern": "be-home",
       "form": "statement",
       "hu": "Otthon vagyok.",
-      "situation": "Telefonon megkérdezik, hol vagy. Otthon vagy.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Otthon vagyok.” Fogalmazd meg angolul!",
       "answer": "I am at home.",
       "accepted": [
         "I'm at home."
@@ -181,7 +181,7 @@
       "pattern": "have-time",
       "form": "statement",
       "hu": "Van időm.",
-      "situation": "Most ráérsz, ezt mondod a barátodnak.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Van időm.” Fogalmazd meg angolul!",
       "answer": "I have time."
     },
     {
@@ -189,7 +189,7 @@
       "pattern": "know-answer",
       "form": "statement",
       "hu": "Tudom a választ.",
-      "situation": "A tanár kérdez, te pedig tudod a választ.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Tudom a választ.” Fogalmazd meg angolul!",
       "answer": "I know the answer."
     },
     {
@@ -197,7 +197,7 @@
       "pattern": "need-help",
       "form": "statement",
       "hu": "Segítségre van szükségem.",
-      "situation": "Nem boldogulsz egy feladattal. Elmondod, hogy segítség kell.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Segítségre van szükségem.” Fogalmazd meg angolul!",
       "answer": "I need help."
     },
     {
@@ -205,7 +205,7 @@
       "pattern": "be-tired",
       "form": "negative",
       "hu": "Nem vagyok fáradt.",
-      "situation": "Valaki azt hiszi, fáradt vagy, de nem így van.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Nem vagyok fáradt.” Fogalmazd meg angolul!",
       "transformFrom": "I am tired.",
       "answer": "I'm not tired.",
       "accepted": [
@@ -217,7 +217,7 @@
       "pattern": "be-home",
       "form": "negative",
       "hu": "Nem vagyok otthon.",
-      "situation": "Telefonon keresnek otthon, de máshol vagy.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Nem vagyok otthon.” Fogalmazd meg angolul!",
       "transformFrom": "I am at home.",
       "answer": "I'm not at home.",
       "accepted": [
@@ -229,7 +229,7 @@
       "pattern": "have-time",
       "form": "negative",
       "hu": "Nincs időm.",
-      "situation": "Most sietsz, és ezt szeretnéd röviden jelezni.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Nincs időm.” Fogalmazd meg angolul!",
       "transformFrom": "I have time.",
       "answer": "I don't have time.",
       "accepted": [
@@ -242,7 +242,7 @@
       "pattern": "know-answer",
       "form": "negative",
       "hu": "Nem tudom a választ.",
-      "situation": "Kérdeznek valamit, de nem tudod a választ.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Nem tudom a választ.” Fogalmazd meg angolul!",
       "transformFrom": "I know the answer.",
       "answer": "I don't know the answer.",
       "accepted": [
@@ -254,7 +254,7 @@
       "pattern": "need-help",
       "form": "negative",
       "hu": "Nincs szükségem segítségre.",
-      "situation": "Felajánlják a segítséget, de egyedül is boldogulsz.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Nincs szükségem segítségre.” Fogalmazd meg angolul!",
       "transformFrom": "I need help.",
       "answer": "I don't need help.",
       "accepted": [
@@ -266,7 +266,7 @@
       "pattern": "be-tired",
       "form": "question",
       "hu": "Fáradt vagy?",
-      "situation": "Meg szeretnéd kérdezni a barátodat, hogy fáradt-e.",
+      "situation": "Egy barátodtól ezt szeretnéd megkérdezni: „Fáradt vagy?” Fogalmazd meg a kérdést angolul!",
       "transformFrom": "You are tired.",
       "answer": "Are you tired?"
     },
@@ -275,7 +275,7 @@
       "pattern": "be-home",
       "form": "question",
       "hu": "Otthon vagy?",
-      "situation": "Telefonon megkérdezed a barátodat, hogy otthon van-e.",
+      "situation": "Egy barátodtól ezt szeretnéd megkérdezni: „Otthon vagy?” Fogalmazd meg a kérdést angolul!",
       "transformFrom": "You are at home.",
       "answer": "Are you at home?"
     },
@@ -284,7 +284,7 @@
       "pattern": "have-time",
       "form": "question",
       "hu": "Van időd?",
-      "situation": "Megkérdeznéd valakitől, hogy most ráér-e.",
+      "situation": "Egy barátodtól ezt szeretnéd megkérdezni: „Van időd?” Fogalmazd meg a kérdést angolul!",
       "transformFrom": "You have time.",
       "answer": "Do you have time?",
       "accepted": [
@@ -296,7 +296,7 @@
       "pattern": "know-answer",
       "form": "question",
       "hu": "Tudod a választ?",
-      "situation": "A társadtól megkérdezed, hogy tudja-e a választ.",
+      "situation": "Egy barátodtól ezt szeretnéd megkérdezni: „Tudod a választ?” Fogalmazd meg a kérdést angolul!",
       "transformFrom": "You know the answer.",
       "answer": "Do you know the answer?"
     },
@@ -305,7 +305,7 @@
       "pattern": "need-help",
       "form": "question",
       "hu": "Szükséged van segítségre?",
-      "situation": "Látod, hogy a társad elakadt. Megkérdezed, kell-e neki segítség.",
+      "situation": "Egy barátodtól ezt szeretnéd megkérdezni: „Szükséged van segítségre?” Fogalmazd meg a kérdést angolul!",
       "transformFrom": "You need help.",
       "answer": "Do you need help?"
     },
@@ -314,7 +314,7 @@
       "pattern": "be-tired",
       "form": "negative",
       "hu": "Ma nem vagyok fáradt.",
-      "situation": "Ma kipihent vagy.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Ma nem vagyok fáradt.” Fogalmazd meg angolul!",
       "answer": "I'm not tired today.",
       "accepted": [
         "Today I'm not tired.",
@@ -326,7 +326,7 @@
       "pattern": "be-home",
       "form": "negative",
       "hu": "Ma nem vagyok otthon.",
-      "situation": "Ma máshol vagy.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Ma nem vagyok otthon.” Fogalmazd meg angolul!",
       "answer": "I'm not at home today.",
       "accepted": [
         "Today I'm not at home.",
@@ -338,7 +338,7 @@
       "pattern": "have-time",
       "form": "negative",
       "hu": "Ma nincs időm.",
-      "situation": "Ma sietsz.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Ma nincs időm.” Fogalmazd meg angolul!",
       "answer": "I don't have time today.",
       "accepted": [
         "Today I don't have time.",
@@ -350,7 +350,7 @@
       "pattern": "know-answer",
       "form": "statement",
       "hu": "Most már tudom a választ.",
-      "situation": "Most már ismered a választ.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Most már tudom a választ.” Fogalmazd meg angolul!",
       "answer": "I know the answer now.",
       "accepted": [
         "Now I know the answer."
@@ -361,7 +361,7 @@
       "pattern": "have-time",
       "form": "statement",
       "hu": "Ma van időm.",
-      "situation": "Ma ráérsz.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Ma van időm.” Fogalmazd meg angolul!",
       "answer": "I have time today.",
       "accepted": [
         "Today I have time."
@@ -372,7 +372,7 @@
       "pattern": "need-help",
       "form": "negative",
       "hu": "Ma nincs szükségem segítségre.",
-      "situation": "Ma egyedül boldogulsz.",
+      "situation": "Ezt szeretnéd elmondani egy barátodnak: „Ma nincs szükségem segítségre.” Fogalmazd meg angolul!",
       "answer": "I don't need help today.",
       "accepted": [
         "Today I don't need help."
