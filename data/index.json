@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "lessons": [
+    {
+      "id": "everyday-01",
+      "title": "Öt mondat a mindennapokra",
+      "file": "lesson-01.json"
+    }
+  ]
+}
