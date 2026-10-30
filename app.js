@@ -136,7 +136,7 @@ function renderProgress(root){const cards=learnedCards();const groups=[{label:'B
 function initSettings(){const dialog=$('#settingsDialog');$('#settingsButton').onclick=()=>dialog.showModal();$('#closeSettings').onclick=()=>dialog.close();$('#exportButton').onclick=()=>{const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),progress:state},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`reflex-trener-mentes-${today()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};$('#importInput').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text()),candidate=parsed.progress;if(!validState(candidate))throw new Error('Nem megfelelő mentési formátum.');if(!confirm('A betöltés felülírja az ezen az eszközön tárolt előrehaladást. Folytatod?'))return;state=candidate;save();session=null;render();$('#settingsStatus').textContent='A mentés sikeresen betöltve.';}catch(err){$('#settingsStatus').textContent='Nem sikerült a betöltés: '+err.message;}finally{e.target.value='';}};}
 async function loadLesson(id){
   const entry=catalog.lessons.find(item=>item.id===id);
-  if(!entry||!/^[a-z0-9-]+\\.json$/i.test(entry.file))throw Error('Érvénytelen tananyag-hivatkozás.');
+  if(!entry||!/^[a-z0-9-]+\.json$/i.test(entry.file))throw Error('Érvénytelen tananyag-hivatkozás.');
   const response=await fetch('./data/'+entry.file);
   if(!response.ok)throw Error('A kiválasztott tananyag nem érhető el.');
   const loaded=await response.json();
