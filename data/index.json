@@ -5,6 +5,11 @@
       "id": "everyday-01",
       "title": "Öt mondat a mindennapokra",
       "file": "lesson-01.json"
+    },
+    {
+      "id": "yesterday-02",
+      "title": "Tegnap és ma",
+      "file": "lesson-02.json"
     }
   ]
 }
