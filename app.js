@@ -5,12 +5,35 @@ const DAY = 86400000;
 const $ = s => document.querySelector(s);
 const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const today = () => new Date().toISOString().slice(0,10);
-const defaultState = () => ({version:1,learned:[],records:{},history:[],completedStages:[]});
+const defaultState = () => ({version:1,learned:[],records:{},history:[],completedStages:[],activityDays:[]});
 let lesson, catalog, state, tab = 'today', session = null, learningIndex = 0, practiceFilter = 'all', exerciseFilter = 'mixed';
 
 function loadState(){try {const data=JSON.parse(localStorage.getItem(KEY));return validState(data)?data:defaultState();}catch{return defaultState();}}
 function validState(data){return !!data && data.version===1 && Array.isArray(data.learned) && data.learned.every(x=>typeof x==='string') && data.records && typeof data.records==='object' && !Array.isArray(data.records) && Array.isArray(data.history);}
 function save(){localStorage.setItem(KEY,JSON.stringify(state));updateDue();}
+function localDay(value){
+  const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Budapest',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(value);
+  const part=type=>parts.find(p=>p.type===type)?.value;
+  return [part('year'),part('month'),part('day')].join('-');
+}
+function markPracticeDay(){
+  state.activityDays??=[];
+  const day=localDay(new Date());
+  if(!state.activityDays.includes(day))state.activityDays.push(day);
+}
+function practiceDays(){
+  const valid=day=>typeof day==='string' && /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(day);
+  const days=new Set((state.activityDays||[]).filter(valid));
+  for(const entry of state.history){
+    if(Number.isFinite(entry.date))days.add(localDay(new Date(entry.date)));
+  }
+  for(const rec of Object.values(state.records)){
+    for(const day of rec?.days||[])if(valid(day))days.add(day);
+    if(Number.isFinite(rec?.last))days.add(localDay(new Date(rec.last)));
+    if(!rec?.last&&rec?.level===1&&Number.isFinite(rec?.due))days.add(localDay(new Date(rec.due)));
+  }
+  return days.size;
+}
 function patternFor(card){return lesson.patterns.find(p=>p.id===card.pattern);}
 function phaseName(form){return ({statement:'Állítás',negative:'Tagadás',question:'Kérdés'})[form];}
 function learnedCards(){return lesson.cards.filter(c=>state.learned.includes(c.id));}
@@ -24,7 +47,7 @@ function dueCards(){const now=Date.now();return learnedCards().filter(c=>record(
 function updateDue(){$('#dueCount').textContent=dueCards().length;}
 function setTab(name){tab=name;session=null;document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));render();}
 function render(){const root=$('#app');if(session){renderSession(root);return;}if(tab==='learn')return renderLearn(root);if(tab==='free')return renderFree(root);if(tab==='progress')return renderProgress(root);renderToday(root);}
-function renderToday(root){const available=learnedCards(),due=dueCards();const next=available.filter(c=>record(c).due>Date.now()).sort((a,b)=>record(a).due-record(b).due)[0];const nextText=next?new Date(record(next).due).toLocaleDateString('hu-HU',{month:'long',day:'numeric'}):'';root.innerHTML=`<section class="panel"><span class="tag">Ajánlott napi útvonal</span><h2>${!available.length?'Kezdjünk az első mondattal!':due.length?'Kezdhetjük a mai gyakorlást?':'A mai ismétlésekkel kész vagy!'}</h2><p>${!available.length?'Előbb megismerkedünk a mintával, és csak utána kérünk önálló választ.':due.length?`Ma ${due.length} mondat vár ismétlésre. Most ezekből válogatunk, a többit a következő alkalomra hagyjuk.`:`Jelenleg nincs esedékes mondatod.${nextText?' A következő ismétlés: '+nextText+'.':''} Ha van kedved, szabadon tovább gyakorolhatsz.`}</p><div class="actions"><button id="mainAction">${!available.length?'Első lecke megnyitása':due.length?'Mai gyakorlás indítása':'Szabad gyakorlás'}</button>${available.length?'<button id="learnMore" class="secondary">Tananyag áttekintése</button>':''}</div></section><div class="grid"><div class="panel"><span class="stat">${state.learned.length}/${lesson.cards.length}</span><p>Bemutatott mondat</p></div><div class="panel"><span class="stat">${available.filter(c=>record(c).level>=3).length}</span><p>Önállóan előhívott mondat</p></div><div class="panel"><span class="stat">${available.filter(c=>record(c).level===4).length}</span><p>Késleltetve is stabil mondat</p></div></div>`;$('#mainAction').onclick=()=>!available.length?setTab('learn'):due.length?startSession('today'):setTab('free');if($('#learnMore'))$('#learnMore').onclick=()=>setTab('learn');}
+function renderToday(root){const available=learnedCards(),due=dueCards();const next=available.filter(c=>record(c).due>Date.now()).sort((a,b)=>record(a).due-record(b).due)[0];const nextText=next?new Date(record(next).due).toLocaleDateString('hu-HU',{month:'long',day:'numeric'}):'';root.innerHTML=`<section class="panel"><span class="tag">Ajánlott napi útvonal</span><h2>${!available.length?'Kezdjünk az első mondattal!':due.length?'Kezdhetjük a mai gyakorlást?':'A mai ismétlésekkel kész vagy!'}</h2><p>${!available.length?'Előbb megismerkedünk a mintával, és csak utána kérünk önálló választ.':due.length?`Ma ${due.length} mondat vár ismétlésre. Most ezekből válogatunk, a többit a következő alkalomra hagyjuk.`:`Jelenleg nincs esedékes mondatod.${nextText?' A következő ismétlés: '+nextText+'.':''} Ha van kedved, szabadon tovább gyakorolhatsz.`}</p><div class="actions"><button id="mainAction">${!available.length?'Első lecke megnyitása':due.length?'Mai gyakorlás indítása':'Szabad gyakorlás'}</button>${available.length?'<button id="learnMore" class="secondary">Tananyag áttekintése</button>':''}</div></section><div class="grid"><div class="panel"><span class="stat">${state.learned.length}/${lesson.cards.length}</span><p>Bemutatott mondat</p></div><div class="panel"><span class="stat">${available.filter(c=>record(c).level>=3).length}</span><p>Önállóan előhívott mondat</p></div><div class="panel"><span class="stat">${available.filter(c=>record(c).level===4).length}</span><p>Késleltetve is stabil mondat</p></div><div class="panel"><span class="stat">${practiceDays()}</span><p>Gyakorlással töltött nap összesen</p></div></div>`;$('#mainAction').onclick=()=>!available.length?setTab('learn'):due.length?startSession('today'):setTab('free');if($('#learnMore'))$('#learnMore').onclick=()=>setTab('learn');}
 function renderLearn(root){
   const stages=lesson.stages||[];
   learningIndex=Math.max(0,Math.min(learningIndex,stages.length-1));
@@ -44,7 +67,7 @@ function renderLearn(root){
   $('#lessonSelect').onchange=async event=>{await loadLesson(event.target.value);render();};
   document.querySelectorAll('[data-stage]').forEach(b=>b.onclick=()=>{learningIndex=Number(b.dataset.stage);render();});
   document.querySelectorAll('[data-listen]').forEach(b=>b.onclick=()=>speak(lesson.cards.find(c=>c.id===b.dataset.listen).answer));
-  document.querySelectorAll('[data-learn]').forEach(b=>b.onclick=()=>{const id=b.dataset.learn;if(!state.learned.includes(id)){state.learned.push(id);state.records[id]??={level:1,streak:0,days:[],due:Date.now()};save();}render();});
+  document.querySelectorAll('[data-learn]').forEach(b=>b.onclick=()=>{const id=b.dataset.learn;if(!state.learned.includes(id)){state.learned.push(id);state.records[id]??={level:1,streak:0,days:[],due:Date.now()};markPracticeDay();save();}render();});
   $('#previousStage').onclick=()=>{learningIndex--;render();};
   $('#nextStage').onclick=()=>{learningIndex++;render();};
   $('#practiceStage').onclick=()=>startSession('stage',stage.id);
@@ -155,7 +178,7 @@ function gradeCard(card,correctness,recall){
   const grade=independentlyCorrect?'independent':recall==='help'?'help':'again';
   state.history.push({card:card.id,date:now,grade,correctness,recall});
   if(state.history.length>1500)state.history=state.history.slice(-1500);
-  save();
+  markPracticeDay();save();
 }
 function renderSummary(root){
   if(session.mode==='stage'&&session.familyId==='mixed'){
@@ -169,7 +192,7 @@ function renderSummary(root){
   $('#endSession').onclick=()=>{session=null;setTab('today');};
   $('#newSession').onclick=()=>startSession(session.mode,session.familyId);
 }
-function renderProgress(root){const cards=learnedCards();const groups=[{label:'Bemutatott',test:r=>r.level===1},{label:'Segítséggel',test:r=>r.level===2},{label:'Önálló',test:r=>r.level===3},{label:'Stabil',test:r=>r.level===4}];root.innerHTML=`<section class="panel"><h2>Tanulási térkép</h2><p>Egy mai jó válasz még nem jelent tartós tudást. A stabil szinthez három külön napon, legalább hét nap időközzel kell önállóan sikerülnie.</p><div class="grid">${groups.map(g=>`<div class="mini"><span class="stat">${cards.filter(c=>g.test(record(c))).length}</span><p>${g.label}</p></div>`).join('')}</div></section><section class="panel"><h2>Mondatcsaládok</h2><div class="stack">${lesson.patterns.map(p=>`<div class="mini"><h3>${escapeHtml(p.title)}</h3>${lesson.cards.filter(c=>c.pattern===p.id).map(c=>`<p>${escapeHtml(c.answer)} <span class="detail">· ${!state.learned.includes(c.id)?'Még nem tanult':['','Bemutatott','Segítséggel','Önálló','Stabil'][record(c).level]||'Bemutatott'}</span></p>`).join('')}</div>`).join('')}</div></section>`;}
+function renderProgress(root){const cards=learnedCards();const groups=[{label:'Bemutatott',test:r=>r.level===1},{label:'Segítséggel',test:r=>r.level===2},{label:'Önálló',test:r=>r.level===3},{label:'Stabil',test:r=>r.level===4}];root.innerHTML=`<section class="panel"><h2>Tanulási térkép</h2><p><strong>${practiceDays()} különböző napon</strong> foglalkoztál már a Reflextrénerrel. A napokat összeadjuk, nem kell egymás után következniük. Az adat a mentett előzményekből számolható.</p><p>Egy mai jó válasz még nem jelent tartós tudást. A stabil szinthez három külön napon, legalább hét nap időközzel kell önállóan sikerülnie.</p><div class="grid">${groups.map(g=>`<div class="mini"><span class="stat">${cards.filter(c=>g.test(record(c))).length}</span><p>${g.label}</p></div>`).join('')}</div></section><section class="panel"><h2>Mondatcsaládok</h2><div class="stack">${lesson.patterns.map(p=>`<div class="mini"><h3>${escapeHtml(p.title)}</h3>${lesson.cards.filter(c=>c.pattern===p.id).map(c=>`<p>${escapeHtml(c.answer)} <span class="detail">· ${!state.learned.includes(c.id)?'Még nem tanult':['','Bemutatott','Segítséggel','Önálló','Stabil'][record(c).level]||'Bemutatott'}</span></p>`).join('')}</div>`).join('')}</div></section>`;}
 
 function initSettings(){const dialog=$('#settingsDialog');$('#settingsButton').onclick=()=>dialog.showModal();$('#closeSettings').onclick=()=>dialog.close();$('#exportButton').onclick=()=>{const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),progress:state},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`reflex-trener-mentes-${today()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};$('#importInput').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text()),candidate=parsed.progress;if(!validState(candidate))throw new Error('Nem megfelelő mentési formátum.');if(!confirm('A betöltés felülírja az ezen az eszközön tárolt előrehaladást. Folytatod?'))return;state=candidate;save();session=null;render();$('#settingsStatus').textContent='A mentés sikeresen betöltve.';}catch(err){$('#settingsStatus').textContent='Nem sikerült a betöltés: '+err.message;}finally{e.target.value='';}};}
 async function loadLesson(id){
