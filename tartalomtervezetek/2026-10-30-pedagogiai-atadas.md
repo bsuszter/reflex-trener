@@ -27,3 +27,15 @@ A `be` és `have/know/need` külön-külön sokszor sikerül, de vegyes, idővá
 - A második lecke múlt idejű mondatait ne a jelen idejű hibafelismerési szabályokkal értékeljük.
 - A szabad párbeszédet a jelenlegi pontos egyezésen alapuló ellenőrző nem tudja megbízhatóan minősíteni; az alkalmazás csak előre rögzített célmondatokkal dolgozzon.
 - A késleltetett ismétlés napokkal később, más szituációban is ellenőrizze az önálló előhívást.
+
+
+## Kiegészítés – kétlépcsős önértékelés (2026-10-30)
+A technikai fejlesztésben a helyesség és az előhívás önálló értékelési tengely. A tartalomnak ezt támogatnia kell:
+- **Helyesség:** helyes / apró elírás / szerkezeti hiba / más hiba.
+- **Előhívás:** azonnal önállóan / gondolkodva önállóan / segítséggel / csak a megoldásból.
+- A gondolkodva önállóan előhívott helyes mondat helyes; nem szabad szerkezeti hibának minősíteni.
+- Ne egyetlen jó próbálkozásból következtessünk tartós tudásra.
+- Célzott késleltetett előhívás: `I'm not tired` ↔ `I don't have time`; `I had time` ↔ `I didn't have time`; `I wasn't at home` ↔ `I didn't know`.
+- A `had` különösen fontos: korábban `I was have time` fordult elő, de később helyesen sikerült `Yesterday I had time to read`.
+- Az első két JSON-tervezetben frissítettük a magyar helyzeteket, magyarázatokat és elfogadott természetes szórendi változatokat. Ezek továbbra is **tervezetek**, nem automatikusan élesítendők.
+- A JSON v2 formátum nem ír elő kártyánkénti hibakódlistát; a speciális pedagógiai hibák leírása itt található. Ne találjunk ki dokumentálatlan mezőket.
