@@ -71,12 +71,27 @@ function explainAnswer(card,answer,result){
   if(result==='minor')return 'Az aposztróf használatára figyelj. A mondat szerkezete egyébként helyes.';
   if(result==='blank')return 'Most megnézted a megoldást. Mondd ki hangosan, és később próbáld újra önállóan!';
   const input=normalize(answer),p=patternFor(card);
+  if(card.pattern.startsWith('past-')){
+    if(/\bi (?:was|were) (?:have|had|know|knew|work|worked)\b/.test(input))return 'A múlt időt itt maga az ige fejezi ki: had, knew vagy worked. Nem teszünk elé was-t.';
+    if(/\b(?:didn't|did not) (?:had|knew|worked)\b/.test(input))return 'A didn’t után az ige alapalakja következik: have, know vagy work.';
+    if(/\bdid you (?:had|knew|worked)\b/.test(input))return 'A Did you után az ige alapalakját használjuk: have, know vagy work.';
+    if(p.group==='be'){
+      if(card.form==='negative'&&/^i (?:not|no|didn't|did not)\b/.test(input))return 'A was tagadó alakja wasn’t: I wasn’t…';
+      if(card.form==='question'&&/^(?:did|do|are|was) you\b/.test(input))return 'A you alannyal a be múlt idejű kérdése Were you…?';
+      if(card.form==='statement'&&/^i (?:tired|at home)\b/.test(input))return 'Múlt idejű állításnál az I után was áll: I was…';
+    }else{
+      if(card.form==='negative'&&/^i (?:not|no|wasn't|was not|don't|do not)\b/.test(input))return 'Múlt idejű tagadásban didn’t + alapige szerepel: I didn’t have/know/work…';
+      if(card.form==='question'&&/^(?:do|are|were) you\b/.test(input))return 'Ezeknél az igéknél a múlt idejű kérdés Did you + alapige…?';
+    }
+    return 'A múlt idejű mintát hasonlítsd össze a megadott mondattal! Ha más, de helyes megoldást írtál, te jelölheted annak.';
+  }
   if(p.group==='be'){
     if(card.form==='statement'&&/^i (?:tired|at home)$/.test(input))return 'Az I után szükség van az am szóra: I am…';
     if(card.form==='negative'&&/^i (?:not|no) (?:tired|at home)$/.test(input))return 'A tagadó mondatban is kell az am: I am not…';
     if(card.form==='question'&&/^you (?:are )?(?:tired|at home)$/.test(input))return 'Kérdésben az are kerül előre: Are you…?';
     if(card.form==='question'&&input.startsWith('do you '))return 'Az are igével kérdezünk, nem a do segédigével: Are you…?';
   }else{
+    if(card.form==='negative'&&/^i (?:haven't|have not) (?:time|the time)\b/.test(input))return 'A tanult szerkezetben így tagadunk: I don’t have time.';
     if(card.form==='negative'&&/^i (?:no|not) (?:have|know|need)\b/.test(input))return 'Az ige elé a don’t kerül: I don’t…';
     if(card.form==='question'&&/^you (?:have|know|need)\b/.test(input))return 'A kérdés elejére a Do kerül: Do you…?';
     if(card.form==='question'&&input.startsWith('are you '))return 'Ezzel az igével a do segédigét használjuk kérdésben: Do you…?';
