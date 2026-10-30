@@ -9,20 +9,20 @@
     {"id":"need-help","group":"do","title":"Segítségre van szükségem","base":"I need help.","meaning":"Segítségre van szükségem.","explanation":"A need igével is a don't / do you szerkezetet használjuk.","examples":["I need help.","I don't need help.","Do you need help?"]}
   ],
   "cards": [
-    {"id":"tired-yes","pattern":"be-tired","form":"statement","hu":"Fáradt vagyok.","answer":"I am tired.","accepted":["I'm tired."]},
-    {"id":"home-yes","pattern":"be-home","form":"statement","hu":"Otthon vagyok.","answer":"I am at home.","accepted":["I'm at home."]},
-    {"id":"time-yes","pattern":"have-time","form":"statement","hu":"Van időm.","answer":"I have time."},
-    {"id":"answer-yes","pattern":"know-answer","form":"statement","hu":"Tudom a választ.","answer":"I know the answer."},
-    {"id":"help-yes","pattern":"need-help","form":"statement","hu":"Segítségre van szükségem.","answer":"I need help."},
-    {"id":"tired-no","pattern":"be-tired","form":"negative","hu":"Nem vagyok fáradt.","answer":"I'm not tired.","accepted":["I am not tired."]},
-    {"id":"home-no","pattern":"be-home","form":"negative","hu":"Nem vagyok otthon.","answer":"I'm not at home.","accepted":["I am not at home."]},
-    {"id":"time-no","pattern":"have-time","form":"negative","hu":"Nincs időm.","answer":"I don't have time.","accepted":["I do not have time.","I haven't got time."]},
-    {"id":"answer-no","pattern":"know-answer","form":"negative","hu":"Nem tudom a választ.","answer":"I don't know the answer.","accepted":["I do not know the answer."]},
-    {"id":"help-no","pattern":"need-help","form":"negative","hu":"Nincs szükségem segítségre.","answer":"I don't need help.","accepted":["I do not need help."]},
-    {"id":"tired-question","pattern":"be-tired","form":"question","hu":"Fáradt vagy?","answer":"Are you tired?"},
-    {"id":"home-question","pattern":"be-home","form":"question","hu":"Otthon vagy?","answer":"Are you at home?"},
-    {"id":"time-question","pattern":"have-time","form":"question","hu":"Van időd?","answer":"Do you have time?","accepted":["Have you got time?"]},
-    {"id":"answer-question","pattern":"know-answer","form":"question","hu":"Tudod a választ?","answer":"Do you know the answer?"},
-    {"id":"help-question","pattern":"need-help","form":"question","hu":"Szükséged van segítségre?","answer":"Do you need help?"}
+    {"id":"tired-yes","pattern":"be-tired","form":"statement","hu":"Fáradt vagyok.","situation":"Egy hosszú nap után elmondod, hogyan érzed magad.","answer":"I am tired.","accepted":["I'm tired."]},
+    {"id":"home-yes","pattern":"be-home","form":"statement","hu":"Otthon vagyok.","situation":"Telefonon megkérdezik, hol vagy. Otthon vagy.","answer":"I am at home.","accepted":["I'm at home."]},
+    {"id":"time-yes","pattern":"have-time","form":"statement","hu":"Van időm.","situation":"Most ráérsz, ezt mondod a barátodnak.","answer":"I have time."},
+    {"id":"answer-yes","pattern":"know-answer","form":"statement","hu":"Tudom a választ.","situation":"A tanár kérdez, te pedig tudod a választ.","answer":"I know the answer."},
+    {"id":"help-yes","pattern":"need-help","form":"statement","hu":"Segítségre van szükségem.","situation":"Nem boldogulsz egy feladattal. Elmondod, hogy segítség kell.","answer":"I need help."},
+    {"id":"tired-no","pattern":"be-tired","form":"negative","hu":"Nem vagyok fáradt.","situation":"Valaki azt hiszi, fáradt vagy, de nem így van.","transformFrom":"I am tired.","answer":"I'm not tired.","accepted":["I am not tired."]},
+    {"id":"home-no","pattern":"be-home","form":"negative","hu":"Nem vagyok otthon.","situation":"Telefonon keresnek otthon, de máshol vagy.","transformFrom":"I am at home.","answer":"I'm not at home.","accepted":["I am not at home."]},
+    {"id":"time-no","pattern":"have-time","form":"negative","hu":"Nincs időm.","situation":"Most sietsz, és ezt szeretnéd röviden jelezni.","transformFrom":"I have time.","answer":"I don't have time.","accepted":["I do not have time.","I haven't got time."]},
+    {"id":"answer-no","pattern":"know-answer","form":"negative","hu":"Nem tudom a választ.","situation":"Kérdeznek valamit, de nem tudod a választ.","transformFrom":"I know the answer.","answer":"I don't know the answer.","accepted":["I do not know the answer."]},
+    {"id":"help-no","pattern":"need-help","form":"negative","hu":"Nincs szükségem segítségre.","situation":"Felajánlják a segítséget, de egyedül is boldogulsz.","transformFrom":"I need help.","answer":"I don't need help.","accepted":["I do not need help."]},
+    {"id":"tired-question","pattern":"be-tired","form":"question","hu":"Fáradt vagy?","situation":"Meg szeretnéd kérdezni a barátodat, hogy fáradt-e.","transformFrom":"You are tired.","answer":"Are you tired?"},
+    {"id":"home-question","pattern":"be-home","form":"question","hu":"Otthon vagy?","situation":"Telefonon megkérdezed a barátodat, hogy otthon van-e.","transformFrom":"You are at home.","answer":"Are you at home?"},
+    {"id":"time-question","pattern":"have-time","form":"question","hu":"Van időd?","situation":"Megkérdeznéd valakitől, hogy most ráér-e.","transformFrom":"You have time.","answer":"Do you have time?","accepted":["Have you got time?"]},
+    {"id":"answer-question","pattern":"know-answer","form":"question","hu":"Tudod a választ?","situation":"A társadtól megkérdezed, hogy tudja-e a választ.","transformFrom":"You know the answer.","answer":"Do you know the answer?"},
+    {"id":"help-question","pattern":"need-help","form":"question","hu":"Szükséged van segítségre?","situation":"Látod, hogy a társad elakadt. Megkérdezed, kell-e neki segítség.","transformFrom":"You need help.","answer":"Do you need help?"}
   ]
 }
