@@ -62,7 +62,7 @@ function startSession(mode,familyId=null){
   const others=all.filter(c=>!due.includes(c));
   const shuffle=a=>a.sort(()=>Math.random()-.5);
   const cards=(mode==='today'?shuffle(due):[...shuffle(due),...shuffle(others)]).slice(0,10);
-  session={mode,familyId,cards,index:0,answer:'',hint:false,revealed:false,results:[],retries:{},currentKind:null,maxQuestions:18};render();
+  session={mode,familyId,cards,index:0,answer:'',hint:false,revealed:false,results:[],retries:{},currentKind:null,maxQuestions:18,assessment:{correctness:null,recall:null}};render();
 }
 function normalize(v){return v.trim().toLowerCase().replace(/[‘’´`]/g,"'").replace(/[.!?]+$/g,'').replace(/\s+/g,' ');}
 function evaluate(card,answer){const entered=normalize(answer);if(!entered)return 'blank';const options=[card.answer,...(card.accepted||[])].map(normalize);if(options.includes(entered))return 'correct';const noPunct=entered.replace(/'/g,'');if(options.some(o=>o.replace(/'/g,'')===noPunct))return 'minor';return 'unknown';}
@@ -106,31 +106,68 @@ function exercisePrompt(card,s){
   if(s.currentKind==='situation')return {kind:'Élethelyzet',label:'Mit mondanál angolul?',prompt:card.situation||card.hu,detail:'A helyzethez tanult rövid mondatot hívd elő.'};
   return {kind:'Magyar → angol',label:'Hogyan mondanád angolul?',prompt:card.hu,detail:'Fordítsd le a magyar gondolatot.'};
 }
-function renderSession(root){const s=session;if(s.index>=s.cards.length){renderSummary(root);return;}const card=s.cards[s.index],p=patternFor(card),result=s.revealed?evaluate(card,s.answer):null,task=exercisePrompt(card,s);root.innerHTML=`<section class="panel"><div class="intro"><span class="tag">${s.mode==='today'?'Mai gyakorlás':'Szabad gyakorlás'} · ${task.kind} · ${phaseName(card.form)}</span><span class="muted">${s.index+1} / ${s.cards.length}</span></div><div class="progress-track"><div style="width:${100*s.index/s.cards.length}%"></div></div><div class="prompt"><small>${escapeHtml(task.label)}</small><h2>${escapeHtml(task.prompt)}</h2><p>${escapeHtml(task.detail)}</p></div><label for="response" class="muted">A te mondatod</label><textarea id="response" class="response" placeholder="Írd be, vagy mondd ki hangosan…" ${s.revealed?'disabled':''}>${escapeHtml(s.answer)}</textarea>${s.hint?`<div class="feedback">Kapaszkodó: <strong>${escapeHtml(card.answer.split(' ').slice(0,2).join(' '))}…</strong></div>`:''}${s.revealed?`<div class="answer"><div class="muted">A rögzítendő mondat</div><strong>${escapeHtml(card.answer)}</strong><p>${escapeHtml(p.explanation)}</p><p class="note">${escapeHtml(explainAnswer(card,s.answer,result))}</p><button id="hear" class="secondary">🔊 Meghallgatom</button></div><h3>Hogyan sikerült?</h3><p class="muted">Őszintén jelöld: ez határozza meg, mikor térünk vissza rá.</p><div class="actions"><button data-grade="again" class="secondary">Még gyakorolnom kell</button><button data-grade="help" class="secondary">Segítséggel ment</button><button data-grade="independent">Önállóan ment</button></div>`:`<div class="actions"><button id="hintButton" class="secondary">Segítséget kérek</button><button id="checkButton">Megnézem a megoldást</button></div><p class="detail">Hangosan is válaszolhatsz, mikrofon nélkül. Utána nézd meg a megoldást, és jelöld az eredményt.</p>`}</section>`;
-if(!s.revealed){const field=$('#response');field.focus();field.oninput=()=>s.answer=field.value;$('#hintButton').onclick=()=>{s.hint=true;render();};$('#checkButton').onclick=()=>{s.answer=field.value;s.revealed=true;render();};field.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#checkButton').click();}};}else{$('#hear').onclick=()=>speak(card.answer);document.querySelectorAll('[data-grade]').forEach(b=>b.onclick=()=>{const grade=b.dataset.grade;if(grade==='independent'&&s.hint){alert('Segítséget használtál, ezért ez a próbálkozás nem számít önállónak. Válaszd a „Segítséggel ment” lehetőséget.');return;}if(grade==='independent'&&result!=='correct'&&result!=='minor'){if(!confirm('Az ellenőrző nem ismerte fel biztosan a válaszodat. Biztosan helyesnek és önállónak értékeled?'))return;}gradeCard(card,grade,s.hint);s.results.push({card:card.id,grade});if(grade!=='independent'&&(s.retries[card.id]||0)<2&&s.cards.length<s.maxQuestions){s.retries[card.id]=(s.retries[card.id]||0)+1;s.cards.splice(Math.min(s.index+3,s.cards.length),0,card);}s.index++;s.answer='';s.hint=false;s.revealed=false;s.currentKind=null;render();});}}
+function renderSession(root){const s=session;if(s.index>=s.cards.length){renderSummary(root);return;}const card=s.cards[s.index],p=patternFor(card),result=s.revealed?evaluate(card,s.answer):null,task=exercisePrompt(card,s);root.innerHTML=`<section class="panel"><div class="intro"><span class="tag">${s.mode==='today'?'Mai gyakorlás':'Szabad gyakorlás'} · ${task.kind} · ${phaseName(card.form)}</span><span class="muted">${s.index+1} / ${s.cards.length}</span></div><div class="progress-track"><div style="width:${100*s.index/s.cards.length}%"></div></div><div class="prompt"><small>${escapeHtml(task.label)}</small><h2>${escapeHtml(task.prompt)}</h2><p>${escapeHtml(task.detail)}</p></div><label for="response" class="muted">A te mondatod</label><textarea id="response" class="response" placeholder="Írd be, vagy mondd ki hangosan…" ${s.revealed?'disabled':''}>${escapeHtml(s.answer)}</textarea>${s.hint?`<div class="feedback">Kapaszkodó: <strong>${escapeHtml(card.answer.split(' ').slice(0,2).join(' '))}…</strong></div>`:''}${s.revealed?`<div class="answer"><div class="muted">A rögzítendő mondat</div><strong>${escapeHtml(card.answer)}</strong><p>${escapeHtml(p.explanation)}</p><p class="note">${escapeHtml(explainAnswer(card,s.answer,result))}</p><button id="hear" class="secondary">🔊 Meghallgatom</button></div><h3>1. Milyen lett a válaszod?</h3><p class="muted">Te döntesz a helyességről. Az automatikus ellenőrzés csak támpont.</p><div class="choice assessment-choice">${[['correct','✓ Helyes'],['minor','✎ Apró elírás'],['structure','⚙ Szerkezeti hiba'],['other','↻ Más hiba']].map(([value,label])=>`<button type="button" data-assess-correct="${value}" class="${s.assessment.correctness===value?'selected':''}">${label}</button>`).join('')}</div><h3>2. Hogyan jutott eszedbe?</h3><div class="choice assessment-choice">${[['instant','⚡ Azonnal, önállóan'],['thought','🧠 Gondolkodva, önállóan'],['help','💡 Segítséggel'],['solution','📖 A megoldásból tanultam']].map(([value,label])=>`<button type="button" data-assess-recall="${value}" class="${s.assessment.recall===value?'selected':''}">${label}</button>`).join('')}</div><p class="detail">Az elírás nem ugyanaz, mint a mondatszerkezeti hiba. A bizonytalan vagy hibás mondat hamarabb visszatér.</p><button id="saveAssessment" ${!s.assessment.correctness||!s.assessment.recall?'disabled':''}>Értékelés mentése és tovább →</button>`:`<div class="actions"><button id="hintButton" class="secondary">Segítséget kérek</button><button id="checkButton">Megnézem a megoldást</button></div><p class="detail">Hangosan is válaszolhatsz, mikrofon nélkül. Utána nézd meg a megoldást, és jelöld az eredményt.</p>`}</section>`;
+if(!s.revealed){const field=$('#response');field.focus();field.oninput=()=>s.answer=field.value;$('#hintButton').onclick=()=>{s.hint=true;render();};$('#checkButton').onclick=()=>{s.answer=field.value;s.revealed=true;render();};field.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#checkButton').click();}};}else{
+  $('#hear').onclick=()=>speak(card.answer);
+  document.querySelectorAll('[data-assess-correct]').forEach(b=>b.onclick=()=>{s.assessment.correctness=b.dataset.assessCorrect;render();});
+  document.querySelectorAll('[data-assess-recall]').forEach(b=>b.onclick=()=>{s.assessment.recall=b.dataset.assessRecall;render();});
+  $('#saveAssessment').onclick=()=>{
+    const {correctness,recall}=s.assessment;
+    if(!correctness||!recall)return;
+    if(s.hint&&(recall==='instant'||recall==='thought')){alert('Kapaszkodót használtál, ezért a „Segítséggel” lehetőséget válaszd.');return;}
+    if(correctness==='correct'&&result==='blank'){if(!confirm('Nem írtál be választ. Biztosan helyesen mondtad ki hangosan?'))return;}
+    if(correctness==='correct'&&result==='unknown'&&s.answer.trim()){if(!confirm('Az ellenőrző ezt a változatot nem ismerte fel. Ellenőrizted, hogy helyes?'))return;}
+    gradeCard(card,correctness,recall);
+    s.results.push({card:card.id,correctness,recall});
+    if((correctness!=='correct'||recall!=='instant')&&(s.retries[card.id]||0)<2&&s.cards.length<s.maxQuestions){
+      s.retries[card.id]=(s.retries[card.id]||0)+1;
+      s.cards.splice(Math.min(s.index+3,s.cards.length),0,card);
+    }
+    s.index++;s.answer='';s.hint=false;s.revealed=false;s.currentKind=null;
+    s.assessment={correctness:null,recall:null};render();
+  };
+}}
 
-function gradeCard(card,grade,usedHint){
+function gradeCard(card,correctness,recall){
   const previous=record(card),now=Date.now(),date=today();
-  const days=Array.isArray(previous.days)?[...previous.days]:[];
+  let days=Array.isArray(previous.days)?[...previous.days]:[];
+  const independentlyCorrect=correctness==='correct'&&(recall==='instant'||recall==='thought');
   let streak=previous.streak||0,level=previous.level||1,due;
-  if(grade==='independent'&&!usedHint){
+  if(independentlyCorrect){
     if(!days.includes(date))days.push(date);
-    // Többszöri siker ugyanazon a napon nem növeli a késleltetett ismétlési fokozatot.
-    const newDay=previous.lastIndependentDay!==date;
-    if(newDay)streak++;
-    const firstDay=days[0];
-    const span=firstDay?Math.floor((new Date(date+'T12:00:00')-new Date(firstDay+'T12:00:00'))/DAY):0;
+    if(previous.lastIndependentDay!==date)streak++;
+    const span=days[0]?Math.floor((new Date(date+'T12:00:00')-new Date(days[0]+'T12:00:00'))/DAY):0;
     level=days.length>=3&&span>=7?4:3;
-    due=now+(streak<=1?DAY:streak===2?3*DAY:7*DAY);
-  }else if(grade==='help'){
-    streak=0;level=previous.level===4?3:2;due=now+DAY;
+    const interval=streak<=1?DAY:streak===2?3*DAY:7*DAY;
+    due=now+(recall==='thought'?Math.min(DAY,interval):interval);
   }else{
-    streak=0;level=previous.level===4?3:2;due=now+5*60000;
+    streak=0;
+    if(correctness==='structure'||correctness==='other'||recall==='help'||recall==='solution')days=[];
+    level=previous.level===4?3:(recall==='solution'?1:2);
+    // A komoly hibák hamarabb, az elírások és a segítséggel megoldott mondatok később térnek vissza.
+    due=now+(correctness==='structure'||correctness==='other'||recall==='solution'?5*60000:
+      correctness==='minor'?4*3600000:DAY);
   }
-  state.records[card.id]={...previous,level,streak,days,due,last:now,lastIndependentDay:grade==='independent'&&!usedHint?date:previous.lastIndependentDay};
-  state.history.push({card:card.id,date:now,grade});if(state.history.length>1500)state.history=state.history.slice(-1500);save();
+  state.records[card.id]={...previous,level,streak,days,due,last:now,
+    lastIndependentDay:independentlyCorrect?date:previous.lastIndependentDay,
+    lastCorrectness:correctness,lastRecall:recall};
+  const grade=independentlyCorrect?'independent':recall==='help'?'help':'again';
+  state.history.push({card:card.id,date:now,grade,correctness,recall});
+  if(state.history.length>1500)state.history=state.history.slice(-1500);
+  save();
 }
-function renderSummary(root){if(session.mode==='stage'&&session.familyId==='mixed'){state.completedStages??=[];const key=stageKey(lesson.stages.find(s=>s.id==='mixed'));if(!state.completedStages.includes(key)){state.completedStages.push(key);save();}}const counts={again:0,help:0,independent:0};session.results.forEach(r=>counts[r.grade]++);root.innerHTML=`<section class="panel empty"><span class="tag">Gyakorlás vége</span><h2>Szép munka, mára ennyi!</h2><p>A hibák a következő gyakorlás feladatait segítenek kiválasztani.</p><div class="grid"><div class="mini"><span class="stat">${counts.independent}</span><p>Önálló</p></div><div class="mini"><span class="stat">${counts.help}</span><p>Segítséggel</p></div><div class="mini"><span class="stat">${counts.again}</span><p>Ismétlendő</p></div></div><div class="actions"><button id="endSession">Vissza a kezdőlapra</button><button id="newSession" class="secondary">Még egy kör</button></div></section>`;$('#endSession').onclick=()=>{session=null;setTab('today');};$('#newSession').onclick=()=>startSession(session.mode,session.familyId);}
+function renderSummary(root){
+  if(session.mode==='stage'&&session.familyId==='mixed'){
+    state.completedStages??=[];
+    const key=stageKey(lesson.stages.find(s=>s.id==='mixed'));
+    if(!state.completedStages.includes(key)){state.completedStages.push(key);save();}
+  }
+  const counts={correct:0,minor:0,structure:0,other:0,independent:0};
+  session.results.forEach(r=>{counts[r.correctness]++;if(r.correctness==='correct'&&(r.recall==='instant'||r.recall==='thought'))counts.independent++;});
+  root.innerHTML=`<section class="panel empty"><span class="tag">Gyakorlás vége</span><h2>Szép munka, mára ennyi!</h2><p>A helyességet és az előhívás módját külön rögzítettük. A bizonytalan mondatok visszatérnek.</p><div class="grid"><div class="mini"><span class="stat">${counts.correct}</span><p>Helyes</p></div><div class="mini"><span class="stat">${counts.independent}</span><p>Helyes és önálló</p></div><div class="mini"><span class="stat">${counts.minor+counts.structure+counts.other}</span><p>Javítandó</p></div></div><div class="actions"><button id="endSession">Vissza a kezdőlapra</button><button id="newSession" class="secondary">Még egy kör</button></div></section>`;
+  $('#endSession').onclick=()=>{session=null;setTab('today');};
+  $('#newSession').onclick=()=>startSession(session.mode,session.familyId);
+}
 function renderProgress(root){const cards=learnedCards();const groups=[{label:'Bemutatott',test:r=>r.level===1},{label:'Segítséggel',test:r=>r.level===2},{label:'Önálló',test:r=>r.level===3},{label:'Stabil',test:r=>r.level===4}];root.innerHTML=`<section class="panel"><h2>Tanulási térkép</h2><p>Egy mai jó válasz még nem jelent tartós tudást. A stabil szinthez három külön napon, legalább hét nap időközzel kell önállóan sikerülnie.</p><div class="grid">${groups.map(g=>`<div class="mini"><span class="stat">${cards.filter(c=>g.test(record(c))).length}</span><p>${g.label}</p></div>`).join('')}</div></section><section class="panel"><h2>Mondatcsaládok</h2><div class="stack">${lesson.patterns.map(p=>`<div class="mini"><h3>${escapeHtml(p.title)}</h3>${lesson.cards.filter(c=>c.pattern===p.id).map(c=>`<p>${escapeHtml(c.answer)} <span class="detail">· ${!state.learned.includes(c.id)?'Még nem tanult':['','Bemutatott','Segítséggel','Önálló','Stabil'][record(c).level]||'Bemutatott'}</span></p>`).join('')}</div>`).join('')}</div></section>`;}
 
 function initSettings(){const dialog=$('#settingsDialog');$('#settingsButton').onclick=()=>dialog.showModal();$('#closeSettings').onclick=()=>dialog.close();$('#exportButton').onclick=()=>{const blob=new Blob([JSON.stringify({exportedAt:new Date().toISOString(),progress:state},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`reflex-trener-mentes-${today()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};$('#importInput').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{const parsed=JSON.parse(await file.text()),candidate=parsed.progress;if(!validState(candidate))throw new Error('Nem megfelelő mentési formátum.');if(!confirm('A betöltés felülírja az ezen az eszközön tárolt előrehaladást. Folytatod?'))return;state=candidate;save();session=null;render();$('#settingsStatus').textContent='A mentés sikeresen betöltve.';}catch(err){$('#settingsStatus').textContent='Nem sikerült a betöltés: '+err.message;}finally{e.target.value='';}};}
