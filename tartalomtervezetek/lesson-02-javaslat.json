@@ -1,0 +1,316 @@
+{
+  "id": "yesterday-02",
+  "title": "Tegnap és ma",
+  "schemaVersion": 2,
+  "stages": [
+    {
+      "id": "statements",
+      "type": "teach",
+      "title": "Tegnap: állítás",
+      "intro": "Tanuljuk a was, had, knew és worked alakokat. Nem mondjuk: I was have.",
+      "cardIds": [
+        "past-tired-yes",
+        "past-home-yes",
+        "past-time-yes",
+        "past-know-yes",
+        "past-work-yes"
+      ]
+    },
+    {
+      "id": "negatives",
+      "type": "teach",
+      "title": "Tegnap: tagadás",
+      "requires": [
+        "statements"
+      ],
+      "intro": "A be igénél wasn't; a többinél didn't + alapige: didn't have, didn't know, didn't work.",
+      "cardIds": [
+        "past-tired-no",
+        "past-home-no",
+        "past-time-no",
+        "past-know-no",
+        "past-work-no"
+      ]
+    },
+    {
+      "id": "questions",
+      "type": "teach",
+      "title": "Tegnap: kérdés",
+      "requires": [
+        "negatives"
+      ],
+      "intro": "Were you ...? vagy Did you have/know/work ...? A did után alapige áll.",
+      "cardIds": [
+        "past-tired-question",
+        "past-home-question",
+        "past-time-question",
+        "past-know-question",
+        "past-work-question"
+      ]
+    },
+    {
+      "id": "context",
+      "type": "teach",
+      "title": "Tegnap és ma",
+      "requires": [
+        "questions"
+      ],
+      "intro": "Most már két időpontot is összekapcsolunk. A tegnap és ma eltérő igealakot kívánhat.",
+      "cardIds": [
+        "past-time-read",
+        "past-time-read-no",
+        "past-home-work",
+        "past-know-now",
+        "past-tired-now",
+        "past-time-now"
+      ]
+    },
+    {
+      "id": "mixed",
+      "type": "practice",
+      "title": "Vegyes előhívás",
+      "requires": [
+        "context"
+      ],
+      "intro": "A szerkezetek váltakoznak. A magyar volt szó önmagában nem elég a választáshoz.",
+      "scope": "learned"
+    },
+    {
+      "id": "review",
+      "type": "review",
+      "title": "Késleltetett ismétlés",
+      "requires": [
+        "mixed"
+      ],
+      "intro": "Több napon át újra előhívjuk a mintákat.",
+      "scope": "learned"
+    }
+  ],
+  "patterns": [
+    {
+      "id": "past-tired",
+      "group": "be",
+      "title": "Fáradt voltam",
+      "base": "I was tired.",
+      "meaning": "Fáradt voltam.",
+      "explanation": "be tired → was tired / wasn't tired / Were you tired?",
+      "examples": [
+        "I was tired."
+      ]
+    },
+    {
+      "id": "past-home",
+      "group": "be",
+      "title": "Otthon voltam",
+      "base": "I was at home.",
+      "meaning": "Otthon voltam.",
+      "explanation": "be at home → was at home / wasn't at home / Were you at home?",
+      "examples": [
+        "I was at home."
+      ]
+    },
+    {
+      "id": "past-time",
+      "group": "do",
+      "title": "Volt időm",
+      "base": "I had time.",
+      "meaning": "Volt időm.",
+      "explanation": "have time → had time / didn't have time / Did you have time? Nem was have.",
+      "examples": [
+        "I had time."
+      ]
+    },
+    {
+      "id": "past-know",
+      "group": "do",
+      "title": "Tudtam a választ",
+      "base": "I knew the answer.",
+      "meaning": "Tudtam a választ.",
+      "explanation": "know → knew / didn't know / Did you know?",
+      "examples": [
+        "I knew the answer."
+      ]
+    },
+    {
+      "id": "past-work",
+      "group": "do",
+      "title": "Dolgoztam",
+      "base": "I worked.",
+      "meaning": "Dolgoztam.",
+      "explanation": "work → worked / didn't work / Did you work?",
+      "examples": [
+        "I worked."
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "id": "past-tired-yes",
+      "pattern": "past-tired",
+      "form": "statement",
+      "hu": "Tegnap fáradt voltam.",
+      "situation": "Tegnap fáradt voltam. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I was tired yesterday."
+    },
+    {
+      "id": "past-tired-no",
+      "pattern": "past-tired",
+      "form": "negative",
+      "hu": "Tegnap nem voltam fáradt.",
+      "situation": "Tegnap nem voltam fáradt. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I wasn't tired yesterday."
+    },
+    {
+      "id": "past-tired-question",
+      "pattern": "past-tired",
+      "form": "question",
+      "hu": "Tegnap fáradt voltál?",
+      "situation": "Tegnap fáradt voltál? Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "Were you tired yesterday?"
+    },
+    {
+      "id": "past-home-yes",
+      "pattern": "past-home",
+      "form": "statement",
+      "hu": "Tegnap otthon voltam.",
+      "situation": "Tegnap otthon voltam. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I was at home yesterday."
+    },
+    {
+      "id": "past-home-no",
+      "pattern": "past-home",
+      "form": "negative",
+      "hu": "Tegnap nem voltam otthon.",
+      "situation": "Tegnap nem voltam otthon. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I wasn't at home yesterday."
+    },
+    {
+      "id": "past-home-question",
+      "pattern": "past-home",
+      "form": "question",
+      "hu": "Tegnap otthon voltál?",
+      "situation": "Tegnap otthon voltál? Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "Were you at home yesterday?"
+    },
+    {
+      "id": "past-time-yes",
+      "pattern": "past-time",
+      "form": "statement",
+      "hu": "Tegnap volt időm.",
+      "situation": "Tegnap volt időm. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I had time yesterday."
+    },
+    {
+      "id": "past-time-no",
+      "pattern": "past-time",
+      "form": "negative",
+      "hu": "Tegnap nem volt időm.",
+      "situation": "Tegnap nem volt időm. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I didn't have time yesterday."
+    },
+    {
+      "id": "past-time-question",
+      "pattern": "past-time",
+      "form": "question",
+      "hu": "Tegnap volt időd?",
+      "situation": "Tegnap volt időd? Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "Did you have time yesterday?"
+    },
+    {
+      "id": "past-know-yes",
+      "pattern": "past-know",
+      "form": "statement",
+      "hu": "Tegnap tudtam a választ.",
+      "situation": "Tegnap tudtam a választ. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I knew the answer yesterday."
+    },
+    {
+      "id": "past-know-no",
+      "pattern": "past-know",
+      "form": "negative",
+      "hu": "Tegnap nem tudtam a választ.",
+      "situation": "Tegnap nem tudtam a választ. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I didn't know the answer yesterday."
+    },
+    {
+      "id": "past-know-question",
+      "pattern": "past-know",
+      "form": "question",
+      "hu": "Tegnap tudtad a választ?",
+      "situation": "Tegnap tudtad a választ? Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "Did you know the answer yesterday?"
+    },
+    {
+      "id": "past-work-yes",
+      "pattern": "past-work",
+      "form": "statement",
+      "hu": "Tegnap dolgoztam.",
+      "situation": "Tegnap dolgoztam. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I worked yesterday."
+    },
+    {
+      "id": "past-work-no",
+      "pattern": "past-work",
+      "form": "negative",
+      "hu": "Tegnap nem dolgoztam.",
+      "situation": "Tegnap nem dolgoztam. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I didn't work yesterday."
+    },
+    {
+      "id": "past-work-question",
+      "pattern": "past-work",
+      "form": "question",
+      "hu": "Tegnap dolgoztál?",
+      "situation": "Tegnap dolgoztál? Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "Did you work yesterday?"
+    },
+    {
+      "id": "past-time-read",
+      "pattern": "past-time",
+      "form": "statement",
+      "hu": "Tegnap volt időm olvasni.",
+      "situation": "Tegnap volt időm olvasni. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I had time to read yesterday."
+    },
+    {
+      "id": "past-time-read-no",
+      "pattern": "past-time",
+      "form": "negative",
+      "hu": "Tegnap nem volt időm olvasni.",
+      "situation": "Tegnap nem volt időm olvasni. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I didn't have time to read yesterday."
+    },
+    {
+      "id": "past-home-work",
+      "pattern": "past-home",
+      "form": "negative",
+      "hu": "Tegnap nem voltam otthon, mert dolgoztam.",
+      "situation": "Tegnap nem voltam otthon, mert dolgoztam. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I wasn't at home yesterday because I worked."
+    },
+    {
+      "id": "past-know-now",
+      "pattern": "past-know",
+      "form": "statement",
+      "hu": "Tegnap nem tudtam a választ, de most tudom.",
+      "situation": "Tegnap nem tudtam a választ, de most tudom. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I didn't know the answer yesterday, but I know it now."
+    },
+    {
+      "id": "past-tired-now",
+      "pattern": "past-tired",
+      "form": "statement",
+      "hu": "Tegnap fáradt voltam, de ma nem vagyok.",
+      "situation": "Tegnap fáradt voltam, de ma nem vagyok. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I was tired yesterday, but I'm not tired today."
+    },
+    {
+      "id": "past-time-now",
+      "pattern": "past-time",
+      "form": "statement",
+      "hu": "Tegnap volt időm, de ma nincs.",
+      "situation": "Tegnap volt időm, de ma nincs. Ezt szeretnéd angolul elmondani vagy megkérdezni.",
+      "answer": "I had time yesterday, but I don't have time today."
+    }
+  ]
+}
