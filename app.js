@@ -1,4 +1,5 @@
-const CATALOG_URL = './data/index.json';
+const CONTENT_REVISION = '20261030-pedagogical-2';
+const CATALOG_URL = './data/index.json?v='+CONTENT_REVISION;
 const KEY = 'reflex-trener-progress-v1';
 const DAY = 86400000;
 const $ = s => document.querySelector(s);
@@ -174,7 +175,7 @@ function initSettings(){const dialog=$('#settingsDialog');$('#settingsButton').o
 async function loadLesson(id){
   const entry=catalog.lessons.find(item=>item.id===id);
   if(!entry||!/^[a-z0-9-]+\.json$/i.test(entry.file))throw Error('Érvénytelen tananyag-hivatkozás.');
-  const response=await fetch('./data/'+entry.file);
+  const response=await fetch('./data/'+entry.file+'?v='+CONTENT_REVISION);
   if(!response.ok)throw Error('A kiválasztott tananyag nem érhető el.');
   const loaded=await response.json();
   if(loaded.id!==entry.id||!Array.isArray(loaded.cards)||!Array.isArray(loaded.patterns)||!Array.isArray(loaded.stages))throw Error('A tananyag szerkezete hibás.');
