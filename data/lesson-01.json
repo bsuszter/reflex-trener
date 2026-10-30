@@ -55,7 +55,7 @@
       "requires": [
         "questions"
       ],
-      "intro": "A tanult mondatokat időhatározóval is használjuk. Előbb nézd át őket.",
+      "intro": "A már megtanult mondatok új helyzetben térnek vissza. A „nem vagyok” mintája I'm not; a „nincs időm” mintája I don't have time. Figyeld a különbséget, ne a magyar van szóból indulj ki.",
       "cardIds": [
         "tired-no-today",
         "home-no-today",
@@ -72,7 +72,7 @@
       "requires": [
         "context"
       ],
-      "intro": "A már tanult állítások, tagadások és kérdések váltakoznak. Nem az a cél, hogy elsőre minden sikerüljön.",
+      "intro": "Váltogasd az I'm not és I don't have / know / need szerkezeteket. A helyességet és az előhívás gyorsaságát külön értékeld: a lassú, de helyes mondat helyes marad.",
       "scope": "learned"
     },
     {
@@ -93,7 +93,7 @@
       "title": "Fáradt vagyok",
       "base": "I am tired.",
       "meaning": "Fáradt vagyok.",
-      "explanation": "Az am az I után áll. Tagadáskor not követi, kérdésben az are kerül a you elé.",
+      "explanation": "A tired melléknévvel a be igét használjuk: I'm tired; I'm not tired; Are you tired? Nem mondjuk: I don't tired.",
       "examples": [
         "I am tired.",
         "I'm not tired.",
@@ -119,7 +119,7 @@
       "title": "Van időm",
       "base": "I have time.",
       "meaning": "Van időm.",
-      "explanation": "Egyszerű jelenben a have tagadásához don't, kérdéséhez do segédigét használunk.",
+      "explanation": "A „van időm” angolul have time: I have time; I don't have time; Do you have time? Nem mondjuk: I was have time; a múlt időt a következő leckében tanuljuk.",
       "examples": [
         "I have time.",
         "I don't have time.",
@@ -132,7 +132,7 @@
       "title": "Tudom a választ",
       "base": "I know the answer.",
       "meaning": "Tudom a választ.",
-      "explanation": "A know tagadásakor don't know, kérdésben do you know a minta.",
+      "explanation": "I know the answer; I don't know the answer; Do you know the answer? A know állapotot jelent, de nem be igével használjuk.",
       "examples": [
         "I know the answer.",
         "I don't know the answer.",
@@ -315,7 +315,11 @@
       "form": "negative",
       "hu": "Ma nem vagyok fáradt.",
       "situation": "Ma kipihent vagy.",
-      "answer": "I'm not tired today."
+      "answer": "I'm not tired today.",
+      "accepted": [
+        "Today I'm not tired.",
+        "I am not tired today."
+      ]
     },
     {
       "id": "home-no-today",
@@ -323,7 +327,11 @@
       "form": "negative",
       "hu": "Ma nem vagyok otthon.",
       "situation": "Ma máshol vagy.",
-      "answer": "I'm not at home today."
+      "answer": "I'm not at home today.",
+      "accepted": [
+        "Today I'm not at home.",
+        "I am not at home today."
+      ]
     },
     {
       "id": "time-no-today",
@@ -331,7 +339,11 @@
       "form": "negative",
       "hu": "Ma nincs időm.",
       "situation": "Ma sietsz.",
-      "answer": "I don't have time today."
+      "answer": "I don't have time today.",
+      "accepted": [
+        "Today I don't have time.",
+        "I do not have time today."
+      ]
     },
     {
       "id": "answer-yes-now",
@@ -339,7 +351,10 @@
       "form": "statement",
       "hu": "Most már tudom a választ.",
       "situation": "Most már ismered a választ.",
-      "answer": "I know the answer now."
+      "answer": "I know the answer now.",
+      "accepted": [
+        "Now I know the answer."
+      ]
     },
     {
       "id": "time-yes-today",
@@ -347,7 +362,10 @@
       "form": "statement",
       "hu": "Ma van időm.",
       "situation": "Ma ráérsz.",
-      "answer": "I have time today."
+      "answer": "I have time today.",
+      "accepted": [
+        "Today I have time."
+      ]
     },
     {
       "id": "help-no-today",
@@ -355,7 +373,10 @@
       "form": "negative",
       "hu": "Ma nincs szükségem segítségre.",
       "situation": "Ma egyedül boldogulsz.",
-      "answer": "I don't need help today."
+      "answer": "I don't need help today.",
+      "accepted": [
+        "Today I don't need help."
+      ]
     }
   ]
 }
