@@ -1,6 +1,48 @@
 {
   "id": "everyday-01",
   "title": "Öt mondat a mindennapokra",
+  "schemaVersion": 2,
+  "stages": [
+    {
+      "id": "statements",
+      "type": "teach",
+      "title": "Állító mondatok",
+      "intro": "Öt gyakori angol kifejezést ismersz meg. Figyeld meg, hogy ugyanazt a magyar gondolatot az angol másképp is kifejezheti.",
+      "cardIds": ["tired-yes", "home-yes", "time-yes", "answer-yes", "help-yes"]
+    },
+    {
+      "id": "negatives",
+      "type": "teach",
+      "title": "Tagadó mondatok",
+      "requires": ["statements"],
+      "intro": "A már megismert állítások tagadását tanulod meg. Az I am és az I have / I know / I need nem ugyanúgy válik tagadóvá.",
+      "cardIds": ["tired-no", "home-no", "time-no", "answer-no", "help-no"]
+    },
+    {
+      "id": "questions",
+      "type": "teach",
+      "title": "Kérdő mondatok",
+      "requires": ["negatives"],
+      "intro": "Most a kérdésekkel ismerkedsz meg. Először olvasd és hallgasd meg a példákat, és csak utána próbáld önállóan.",
+      "cardIds": ["tired-question", "home-question", "time-question", "answer-question", "help-question"]
+    },
+    {
+      "id": "mixed",
+      "type": "practice",
+      "title": "Vegyes előhívás",
+      "requires": ["questions"],
+      "intro": "A már tanult állítások, tagadások és kérdések váltakoznak. Nem az a cél, hogy elsőre minden sikerüljön.",
+      "scope": "learned"
+    },
+    {
+      "id": "review",
+      "type": "review",
+      "title": "Késleltetett ismétlés",
+      "requires": ["mixed"],
+      "intro": "A mondatok több napon át visszatérnek. A stabil tudáshoz különböző napokon, segítség nélkül is sikerülnie kell.",
+      "scope": "learned"
+    }
+  ],
   "patterns": [
     {"id":"be-tired","group":"be","title":"Fáradt vagyok","base":"I am tired.","meaning":"Fáradt vagyok.","explanation":"Az am az I után áll. Tagadáskor not követi, kérdésben az are kerül a you elé.","examples":["I am tired.","I'm not tired.","Are you tired?"]},
     {"id":"be-home","group":"be","title":"Otthon vagyok","base":"I am at home.","meaning":"Otthon vagyok.","explanation":"Az at home jelentése: otthon. Ugyanazt az am / am not / are you mintát használjuk.","examples":["I am at home.","I'm not at home.","Are you at home?"]},
