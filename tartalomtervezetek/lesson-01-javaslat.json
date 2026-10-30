@@ -1,8 +1,296 @@
 {
   "id": "everyday-01",
-  "title": "Öt mindennapi gondolat – tartalmi tervezet",
+  "title": "Öt mindennapi gondolat – pedagógiai tervezet",
   "schemaVersion": 2,
-  "stages": [],
-  "patterns": [],
-  "cards": []
+  "stages": [
+    {
+      "id": "statements",
+      "type": "teach",
+      "title": "Állító mondatok",
+      "intro": "Öt teljes angol kifejezést tanulunk. A magyar van szóból nem következtetünk automatikusan az angol igére.",
+      "cardIds": [
+        "tired-yes",
+        "home-yes",
+        "time-yes",
+        "answer-yes",
+        "help-yes"
+      ]
+    },
+    {
+      "id": "negatives",
+      "type": "teach",
+      "title": "Tagadó mondatok",
+      "requires": [
+        "statements"
+      ],
+      "intro": "I'm not tired / I'm not at home, de I don't have time / I don't know / I don't need help. A know is állapot, mégis don't know.",
+      "cardIds": [
+        "tired-no",
+        "home-no",
+        "time-no",
+        "answer-no",
+        "help-no"
+      ]
+    },
+    {
+      "id": "questions",
+      "type": "teach",
+      "title": "Kérdő mondatok",
+      "requires": [
+        "negatives"
+      ],
+      "intro": "Most a kérdésekkel ismerkedsz meg. Először olvasd és hallgasd meg a példákat, és csak utána próbáld önállóan.",
+      "cardIds": [
+        "tired-question",
+        "home-question",
+        "time-question",
+        "answer-question",
+        "help-question"
+      ]
+    },
+    {
+      "id": "mixed",
+      "type": "practice",
+      "title": "Vegyes előhívás",
+      "requires": [
+        "questions"
+      ],
+      "intro": "A már tanult állítások, tagadások és kérdések váltakoznak. Nem az a cél, hogy elsőre minden sikerüljön.",
+      "scope": "learned"
+    },
+    {
+      "id": "review",
+      "type": "review",
+      "title": "Késleltetett ismétlés",
+      "requires": [
+        "mixed"
+      ],
+      "intro": "A mondatok több napon át visszatérnek. A stabil tudáshoz különböző napokon, segítség nélkül is sikerülnie kell.",
+      "scope": "learned"
+    }
+  ],
+  "patterns": [
+    {
+      "id": "be-tired",
+      "group": "be",
+      "title": "Fáradt vagyok",
+      "base": "I am tired.",
+      "meaning": "Fáradt vagyok.",
+      "explanation": "Az am az I után áll. Tagadáskor not követi, kérdésben az are kerül a you elé.",
+      "examples": [
+        "I am tired.",
+        "I'm not tired.",
+        "Are you tired?"
+      ]
+    },
+    {
+      "id": "be-home",
+      "group": "be",
+      "title": "Otthon vagyok",
+      "base": "I am at home.",
+      "meaning": "Otthon vagyok.",
+      "explanation": "Az at home jelentése: otthon. Ugyanazt az am / am not / are you mintát használjuk.",
+      "examples": [
+        "I am at home.",
+        "I'm not at home.",
+        "Are you at home?"
+      ]
+    },
+    {
+      "id": "have-time",
+      "group": "do",
+      "title": "Van időm",
+      "base": "I have time.",
+      "meaning": "Van időm.",
+      "explanation": "Egyszerű jelenben a have tagadásához don't, kérdéséhez do segédigét használunk.",
+      "examples": [
+        "I have time.",
+        "I don't have time.",
+        "Do you have time?"
+      ]
+    },
+    {
+      "id": "know-answer",
+      "group": "do",
+      "title": "Tudom a választ",
+      "base": "I know the answer.",
+      "meaning": "Tudom a választ.",
+      "explanation": "A know tagadásakor don't know, kérdésben do you know a minta.",
+      "examples": [
+        "I know the answer.",
+        "I don't know the answer.",
+        "Do you know the answer?"
+      ]
+    },
+    {
+      "id": "need-help",
+      "group": "do",
+      "title": "Segítségre van szükségem",
+      "base": "I need help.",
+      "meaning": "Segítségre van szükségem.",
+      "explanation": "A need igével is a don't / do you szerkezetet használjuk.",
+      "examples": [
+        "I need help.",
+        "I don't need help.",
+        "Do you need help?"
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "id": "tired-yes",
+      "pattern": "be-tired",
+      "form": "statement",
+      "hu": "Fáradt vagyok.",
+      "situation": "Egy hosszú nap után elmondod, hogyan érzed magad.",
+      "answer": "I am tired.",
+      "accepted": [
+        "I'm tired."
+      ]
+    },
+    {
+      "id": "home-yes",
+      "pattern": "be-home",
+      "form": "statement",
+      "hu": "Otthon vagyok.",
+      "situation": "Telefonon megkérdezik, hol vagy. Otthon vagy.",
+      "answer": "I am at home.",
+      "accepted": [
+        "I'm at home."
+      ]
+    },
+    {
+      "id": "time-yes",
+      "pattern": "have-time",
+      "form": "statement",
+      "hu": "Van időm.",
+      "situation": "Most ráérsz, ezt mondod a barátodnak.",
+      "answer": "I have time."
+    },
+    {
+      "id": "answer-yes",
+      "pattern": "know-answer",
+      "form": "statement",
+      "hu": "Tudom a választ.",
+      "situation": "A tanár kérdez, te pedig tudod a választ.",
+      "answer": "I know the answer."
+    },
+    {
+      "id": "help-yes",
+      "pattern": "need-help",
+      "form": "statement",
+      "hu": "Segítségre van szükségem.",
+      "situation": "Nem boldogulsz egy feladattal. Elmondod, hogy segítség kell.",
+      "answer": "I need help."
+    },
+    {
+      "id": "tired-no",
+      "pattern": "be-tired",
+      "form": "negative",
+      "hu": "Nem vagyok fáradt.",
+      "situation": "Valaki azt hiszi, fáradt vagy, de nem így van.",
+      "transformFrom": "I am tired.",
+      "answer": "I'm not tired.",
+      "accepted": [
+        "I am not tired."
+      ]
+    },
+    {
+      "id": "home-no",
+      "pattern": "be-home",
+      "form": "negative",
+      "hu": "Nem vagyok otthon.",
+      "situation": "Telefonon keresnek otthon, de máshol vagy.",
+      "transformFrom": "I am at home.",
+      "answer": "I'm not at home.",
+      "accepted": [
+        "I am not at home."
+      ]
+    },
+    {
+      "id": "time-no",
+      "pattern": "have-time",
+      "form": "negative",
+      "hu": "Nincs időm.",
+      "situation": "Most sietsz, és ezt szeretnéd röviden jelezni.",
+      "transformFrom": "I have time.",
+      "answer": "I don't have time.",
+      "accepted": [
+        "I do not have time.",
+        "I haven't got time."
+      ]
+    },
+    {
+      "id": "answer-no",
+      "pattern": "know-answer",
+      "form": "negative",
+      "hu": "Nem tudom a választ.",
+      "situation": "Kérdeznek valamit, de nem tudod a választ.",
+      "transformFrom": "I know the answer.",
+      "answer": "I don't know the answer.",
+      "accepted": [
+        "I do not know the answer."
+      ]
+    },
+    {
+      "id": "help-no",
+      "pattern": "need-help",
+      "form": "negative",
+      "hu": "Nincs szükségem segítségre.",
+      "situation": "Felajánlják a segítséget, de egyedül is boldogulsz.",
+      "transformFrom": "I need help.",
+      "answer": "I don't need help.",
+      "accepted": [
+        "I do not need help."
+      ]
+    },
+    {
+      "id": "tired-question",
+      "pattern": "be-tired",
+      "form": "question",
+      "hu": "Fáradt vagy?",
+      "situation": "Meg szeretnéd kérdezni a barátodat, hogy fáradt-e.",
+      "transformFrom": "You are tired.",
+      "answer": "Are you tired?"
+    },
+    {
+      "id": "home-question",
+      "pattern": "be-home",
+      "form": "question",
+      "hu": "Otthon vagy?",
+      "situation": "Telefonon megkérdezed a barátodat, hogy otthon van-e.",
+      "transformFrom": "You are at home.",
+      "answer": "Are you at home?"
+    },
+    {
+      "id": "time-question",
+      "pattern": "have-time",
+      "form": "question",
+      "hu": "Van időd?",
+      "situation": "Megkérdeznéd valakitől, hogy most ráér-e.",
+      "transformFrom": "You have time.",
+      "answer": "Do you have time?",
+      "accepted": [
+        "Have you got time?"
+      ]
+    },
+    {
+      "id": "answer-question",
+      "pattern": "know-answer",
+      "form": "question",
+      "hu": "Tudod a választ?",
+      "situation": "A társadtól megkérdezed, hogy tudja-e a választ.",
+      "transformFrom": "You know the answer.",
+      "answer": "Do you know the answer?"
+    },
+    {
+      "id": "help-question",
+      "pattern": "need-help",
+      "form": "question",
+      "hu": "Szükséged van segítségre?",
+      "situation": "Látod, hogy a társad elakadt. Megkérdezed, kell-e neki segítség.",
+      "transformFrom": "You need help.",
+      "answer": "Do you need help?"
+    }
+  ]
 }
