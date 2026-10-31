@@ -1,0 +1,284 @@
+{
+  "id": "everyday-03",
+  "title": "Múlt idejű kérdések és éppen történt események",
+  "schemaVersion": 2,
+  "stages": [
+    {
+      "id": "review-questions",
+      "type": "teach",
+      "title": "Rövid ismétlés: Did + alapalak",
+      "intro": "Előbb nézd át a mintákat. A kérdésben a did jelzi a múltat; az ige alapalakban marad.",
+      "cardIds": [
+        "q-work",
+        "q-meet",
+        "q-stay"
+      ]
+    },
+    {
+      "id": "review-meaning",
+      "type": "teach",
+      "title": "Idő, kötelezettség és tagadás",
+      "requires": [
+        "review-questions"
+      ],
+      "intro": "A have time to és have to nem ugyanaz. A wasn't a be igével, a didn't más igékkel használatos.",
+      "cardIds": [
+        "q-read-time",
+        "q-work-duty",
+        "time-read",
+        "duty-work",
+        "not-home",
+        "not-work",
+        "not-know"
+      ]
+    },
+    {
+      "id": "review-phrases",
+      "type": "teach",
+      "title": "Rövid kifejezések",
+      "requires": [
+        "review-meaning"
+      ],
+      "intro": "Figyeld a the bus névelőt és a called me jelentését.",
+      "cardIds": [
+        "bus-wait",
+        "friend-called"
+      ]
+    },
+    {
+      "id": "teach-continuous",
+      "type": "teach",
+      "title": "Új anyag: éppen történt a múltban",
+      "requires": [
+        "review-phrases"
+      ],
+      "intro": "ÚJ: was/were + -ing. Először olvasd el és tanuld meg a mintákat; csak ezután gyakorolj. Például I was reading when my phone rang. A folyamatos múltat nem kérjük számon tanítás előtt.",
+      "cardIds": [
+        "pc-read",
+        "pc-dinner",
+        "pc-bus",
+        "pc-work"
+      ]
+    },
+    {
+      "id": "mixed",
+      "type": "practice",
+      "title": "Rövid vegyes gyakorlás",
+      "requires": [
+        "teach-continuous"
+      ],
+      "intro": "Vegyesen előkerülnek a már bemutatott mondatok. A helyességet és az önálló előhívást külön értékeld.",
+      "scope": "learned"
+    },
+    {
+      "id": "review",
+      "type": "review",
+      "title": "Késleltetett ismétlés",
+      "requires": [
+        "mixed"
+      ],
+      "intro": "Más napokon újra előhívjuk a mintákat; az első siker még nem tartós tudás.",
+      "scope": "learned"
+    }
+  ],
+  "patterns": [
+    {
+      "id": "did-question",
+      "group": "do",
+      "title": "Múlt idejű kérdések",
+      "base": "Did you work yesterday?",
+      "meaning": "Dolgoztál tegnap?",
+      "explanation": "Did + alapalak: Did you work? Nem Did you worked.",
+      "examples": [
+        "Did you work yesterday?",
+        "Did you meet your friend yesterday?",
+        "Did you stay at home last night?"
+      ]
+    },
+    {
+      "id": "time-or-duty",
+      "group": "do",
+      "title": "Volt időm vagy kellett?",
+      "base": "I had time to read.",
+      "meaning": "Volt időm olvasni.",
+      "explanation": "had time to = volt időm; had to = kellett. Kérdésben did you have time to / did you have to.",
+      "examples": [
+        "I had time to read.",
+        "I had to work.",
+        "Did you have time to read?"
+      ]
+    },
+    {
+      "id": "past-be-do",
+      "group": "be",
+      "title": "wasn't és didn't",
+      "base": "I wasn't at home yesterday.",
+      "meaning": "Tegnap nem voltam otthon.",
+      "explanation": "be: wasn't; más igék: didn't + alapalak. A know is didn't know.",
+      "examples": [
+        "I wasn't at home.",
+        "I didn't work.",
+        "I didn't know the answer."
+      ]
+    },
+    {
+      "id": "past-continuous",
+      "group": "be",
+      "title": "Éppen történt: folyamatos múlt",
+      "base": "I was reading when my phone rang.",
+      "meaning": "Éppen olvastam, amikor megszólalt a telefonom.",
+      "explanation": "ÚJ TANANYAG. Előbb tanulás: was/were + -ing egy folyamatban lévő múltbeli cselekvéshez; when + egyszerű múlt a közben történt eseményhez. have dinner → having dinner; ring → rang.",
+      "examples": [
+        "I was reading when my phone rang.",
+        "I was waiting for the bus when my friend called me.",
+        "I was having dinner when my phone rang."
+      ]
+    },
+    {
+      "id": "bus-and-call",
+      "group": "do",
+      "title": "A busz és a telefonhívás",
+      "base": "I'm waiting for the bus.",
+      "meaning": "A buszra várok.",
+      "explanation": "wait for the bus (névelővel); call me = felhív telefonon; called for me más jelentésű lehet.",
+      "examples": [
+        "I'm waiting for the bus.",
+        "My friend called me.",
+        "I was waiting for the bus."
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "id": "q-work",
+      "pattern": "did-question",
+      "form": "question",
+      "hu": "Dolgoztál tegnap?",
+      "situation": "Ezt kérdezed a barátodtól: „Dolgoztál tegnap?” Fogalmazd meg angolul!",
+      "answer": "Did you work yesterday?"
+    },
+    {
+      "id": "q-meet",
+      "pattern": "did-question",
+      "form": "question",
+      "hu": "Találkoztál tegnap a barátoddal?",
+      "situation": "Ezt kérdezed a barátodtól: „Találkoztál tegnap a barátoddal?” Fogalmazd meg angolul!",
+      "answer": "Did you meet your friend yesterday?"
+    },
+    {
+      "id": "q-stay",
+      "pattern": "did-question",
+      "form": "question",
+      "hu": "Otthon maradtál tegnap este?",
+      "situation": "Ezt kérdezed a barátodtól: „Otthon maradtál tegnap este?” Fogalmazd meg angolul!",
+      "answer": "Did you stay at home last night?"
+    },
+    {
+      "id": "q-read-time",
+      "pattern": "time-or-duty",
+      "form": "question",
+      "hu": "Volt tegnap időd olvasni?",
+      "situation": "Ezt kérdezed a barátodtól: „Volt tegnap időd olvasni?” Fogalmazd meg angolul!",
+      "answer": "Did you have time to read yesterday?"
+    },
+    {
+      "id": "q-work-duty",
+      "pattern": "time-or-duty",
+      "form": "question",
+      "hu": "Kellett tegnap dolgoznod?",
+      "situation": "Ezt kérdezed a barátodtól: „Kellett tegnap dolgoznod?” Fogalmazd meg angolul!",
+      "answer": "Did you have to work yesterday?"
+    },
+    {
+      "id": "time-read",
+      "pattern": "time-or-duty",
+      "form": "statement",
+      "hu": "Tegnap volt időm olvasni.",
+      "situation": "Ezt mondod a barátodnak: „Tegnap volt időm olvasni.” Fogalmazd meg angolul!",
+      "answer": "I had time to read yesterday."
+    },
+    {
+      "id": "duty-work",
+      "pattern": "time-or-duty",
+      "form": "statement",
+      "hu": "Tegnap dolgoznom kellett.",
+      "situation": "Ezt mondod a barátodnak: „Tegnap dolgoznom kellett.” Fogalmazd meg angolul!",
+      "answer": "I had to work yesterday."
+    },
+    {
+      "id": "not-home",
+      "pattern": "past-be-do",
+      "form": "negative",
+      "hu": "Tegnap nem voltam otthon.",
+      "situation": "Ezt mondod a barátodnak: „Tegnap nem voltam otthon.” Fogalmazd meg angolul!",
+      "answer": "I wasn't at home yesterday."
+    },
+    {
+      "id": "not-work",
+      "pattern": "past-be-do",
+      "form": "negative",
+      "hu": "Tegnap nem dolgoztam.",
+      "situation": "Ezt mondod a barátodnak: „Tegnap nem dolgoztam.” Fogalmazd meg angolul!",
+      "answer": "I didn't work yesterday."
+    },
+    {
+      "id": "not-know",
+      "pattern": "past-be-do",
+      "form": "negative",
+      "hu": "Tegnap nem tudtam a választ.",
+      "situation": "Ezt mondod a barátodnak: „Tegnap nem tudtam a választ.” Fogalmazd meg angolul!",
+      "answer": "I didn't know the answer yesterday."
+    },
+    {
+      "id": "bus-wait",
+      "pattern": "bus-and-call",
+      "form": "statement",
+      "hu": "Most a buszra várok.",
+      "situation": "Ezt mondod a barátodnak: „Most a buszra várok.” Fogalmazd meg angolul!",
+      "answer": "I'm waiting for the bus.",
+      "accepted": [
+        "I am waiting for the bus."
+      ]
+    },
+    {
+      "id": "friend-called",
+      "pattern": "bus-and-call",
+      "form": "statement",
+      "hu": "A barátom felhívott.",
+      "situation": "Ezt mondod a barátodnak: „A barátom felhívott.” Fogalmazd meg angolul!",
+      "answer": "My friend called me."
+    },
+    {
+      "id": "pc-read",
+      "pattern": "past-continuous",
+      "form": "statement",
+      "hu": "Éppen olvastam, amikor megszólalt a telefonom.",
+      "situation": "Ezt mondod a barátodnak: „Éppen olvastam, amikor megszólalt a telefonom.” Fogalmazd meg angolul!",
+      "answer": "I was reading when my phone rang."
+    },
+    {
+      "id": "pc-dinner",
+      "pattern": "past-continuous",
+      "form": "statement",
+      "hu": "Éppen vacsoráztam, amikor megszólalt a telefonom.",
+      "situation": "Ezt mondod a barátodnak: „Éppen vacsoráztam, amikor megszólalt a telefonom.” Fogalmazd meg angolul!",
+      "answer": "I was having dinner when my phone rang."
+    },
+    {
+      "id": "pc-bus",
+      "pattern": "past-continuous",
+      "form": "statement",
+      "hu": "Éppen a buszra vártam, amikor a barátom felhívott.",
+      "situation": "Ezt mondod a barátodnak: „Éppen a buszra vártam, amikor a barátom felhívott.” Fogalmazd meg angolul!",
+      "answer": "I was waiting for the bus when my friend called me."
+    },
+    {
+      "id": "pc-work",
+      "pattern": "past-continuous",
+      "form": "statement",
+      "hu": "Éppen dolgoztam, amikor a barátom felhívott.",
+      "situation": "Ezt mondod a barátodnak: „Éppen dolgoztam, amikor a barátom felhívott.” Fogalmazd meg angolul!",
+      "answer": "I was working when my friend called me."
+    }
+  ]
+}
