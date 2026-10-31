@@ -1,4 +1,4 @@
-const CONTENT_REVISION = '20261030-situations-3';
+const CONTENT_REVISION = '20261031-ui-4';
 const CATALOG_URL = './data/index.json?v='+CONTENT_REVISION;
 const KEY = 'reflex-trener-progress-v1';
 const DAY = 86400000;
@@ -89,7 +89,17 @@ function startSession(mode,familyId=null){
   session={mode,familyId,cards,index:0,answer:'',hint:false,revealed:false,results:[],retries:{},currentKind:null,maxQuestions:18,assessment:{correctness:null,recall:null}};render();
 }
 function normalize(v){return v.trim().toLowerCase().replace(/[‘’´`]/g,"'").replace(/[.!?]+$/g,'').replace(/\s+/g,' ');}
-function evaluate(card,answer){const entered=normalize(answer);if(!entered)return 'blank';const options=[card.answer,...(card.accepted||[])].map(normalize);if(options.includes(entered))return 'correct';const noPunct=entered.replace(/'/g,'');if(options.some(o=>o.replace(/'/g,'')===noPunct))return 'minor';return 'unknown';}
+function expandContractions(value){
+  return normalize(value).replace(/\b(i'm|you're|we're|they're|he's|she's|it's|isn't|aren't|wasn't|weren't|don't|doesn't|didn't|haven't|hasn't|hadn't|can't|cannot|won't)\b/g, match=>({
+    "i'm":"i am","you're":"you are","we're":"we are","they're":"they are",
+    "he's":"he is","she's":"she is","it's":"it is","isn't":"is not",
+    "aren't":"are not","wasn't":"was not","weren't":"were not",
+    "don't":"do not","doesn't":"does not","didn't":"did not",
+    "haven't":"have not","hasn't":"has not","hadn't":"had not",
+    "can't":"can not","cannot":"can not","won't":"will not"
+  })[match]).replace(/\s+/g,' ');
+}
+function evaluate(card,answer){const entered=normalize(answer);if(!entered)return 'blank';const options=[card.answer,...(card.accepted||[])];if(options.some(o=>expandContractions(o)===expandContractions(entered)))return 'correct';const noPunct=entered.replace(/'/g,'');if(options.some(o=>normalize(o).replace(/'/g,'')===noPunct))return 'minor';return 'unknown';}
 function explainAnswer(card,answer,result){
   if(result==='correct')return 'A beírt változat helyes.';
   if(result==='minor')return 'Az aposztróf használatára figyelj. A mondat szerkezete egyébként helyes.';
@@ -107,7 +117,7 @@ function explainAnswer(card,answer,result){
       if(card.form==='negative'&&/^i (?:not|no|wasn't|was not|don't|do not)\b/.test(input))return 'Múlt idejű tagadásban didn’t + alapige szerepel: I didn’t have/know/work…';
       if(card.form==='question'&&/^(?:do|are|were) you\b/.test(input))return 'Ezeknél az igéknél a múlt idejű kérdés Did you + alapige…?';
     }
-    return 'A múlt idejű mintát hasonlítsd össze a megadott mondattal! Ha más, de helyes megoldást írtál, te jelölheted annak.';
+    return 'Ezt a változatot nem ismerte fel az automatikus ellenőrző. Az önértékelésnél te döntesz.';
   }
   if(p.group==='be'){
     if(card.form==='statement'&&/^i (?:tired|at home)$/.test(input))return 'Az I után szükség van az am szóra: I am…';
@@ -120,7 +130,7 @@ function explainAnswer(card,answer,result){
     if(card.form==='question'&&/^you (?:have|know|need)\b/.test(input))return 'A kérdés elejére a Do kerül: Do you…?';
     if(card.form==='question'&&input.startsWith('are you '))return 'Ezzel az igével a do segédigét használjuk kérdésben: Do you…?';
   }
-  return 'Ezt a változatot nem tudom biztosan megítélni. Hasonlítsd össze a tanulandó mondattal! Ha helyesnek tartod, ezt te jelölheted.';
+  return 'Ezt a változatot nem ismerte fel az automatikus ellenőrző. Az önértékelésnél te döntesz.';
 }
 function exercisePrompt(card,s){
   const choice=s.mode==='free'?exerciseFilter:'mixed';
@@ -130,8 +140,8 @@ function exercisePrompt(card,s){
   if(s.currentKind==='situation')return {kind:'Élethelyzet',label:'Mit mondanál angolul?',prompt:card.situation||card.hu,detail:'A helyzethez tanult rövid mondatot hívd elő.'};
   return {kind:'Magyar → angol',label:'Hogyan mondanád angolul?',prompt:card.hu,detail:'Fordítsd le a magyar gondolatot.'};
 }
-function renderSession(root){const s=session;if(s.index>=s.cards.length){renderSummary(root);return;}const card=s.cards[s.index],p=patternFor(card),result=s.revealed?evaluate(card,s.answer):null,task=exercisePrompt(card,s);root.innerHTML=`<section class="panel"><div class="intro"><span class="tag">${s.mode==='today'?'Mai gyakorlás':'Szabad gyakorlás'} · ${task.kind} · ${phaseName(card.form)}</span><span class="muted">${s.index+1} / ${s.cards.length}</span></div><div class="progress-track"><div style="width:${100*s.index/s.cards.length}%"></div></div><div class="prompt"><small>${escapeHtml(task.label)}</small><h2>${escapeHtml(task.prompt)}</h2><p>${escapeHtml(task.detail)}</p></div><label for="response" class="muted">A te mondatod</label><textarea id="response" class="response" placeholder="Írd be, vagy mondd ki hangosan…" ${s.revealed?'disabled':''}>${escapeHtml(s.answer)}</textarea>${s.hint?`<div class="feedback">Kapaszkodó: <strong>${escapeHtml(card.answer.split(' ').slice(0,2).join(' '))}…</strong></div>`:''}${s.revealed?`<div class="answer"><div class="muted">A rögzítendő mondat</div><strong>${escapeHtml(card.answer)}</strong><p>${escapeHtml(p.explanation)}</p><p class="note">${escapeHtml(explainAnswer(card,s.answer,result))}</p><button id="hear" class="secondary">🔊 Meghallgatom</button></div><h3>1. Milyen lett a válaszod?</h3><p class="muted">Te döntesz a helyességről. Az automatikus ellenőrzés csak támpont.</p><div class="choice assessment-choice">${[['correct','✓ Helyes'],['minor','✎ Apró elírás'],['structure','⚙ Szerkezeti hiba'],['other','↻ Más hiba']].map(([value,label])=>`<button type="button" data-assess-correct="${value}" class="${s.assessment.correctness===value?'selected':''}">${label}</button>`).join('')}</div><h3>2. Hogyan jutott eszedbe?</h3><div class="choice assessment-choice">${[['instant','⚡ Azonnal, önállóan'],['thought','🧠 Gondolkodva, önállóan'],['help','💡 Segítséggel'],['solution','📖 A megoldásból tanultam']].map(([value,label])=>`<button type="button" data-assess-recall="${value}" class="${s.assessment.recall===value?'selected':''}">${label}</button>`).join('')}</div><p class="detail">Az elírás nem ugyanaz, mint a mondatszerkezeti hiba. A bizonytalan vagy hibás mondat hamarabb visszatér.</p><button id="saveAssessment" ${!s.assessment.correctness||!s.assessment.recall?'disabled':''}>Értékelés mentése és tovább →</button>`:`<div class="actions"><button id="hintButton" class="secondary">Segítséget kérek</button><button id="checkButton">Megnézem a megoldást</button></div><p class="detail">Hangosan is válaszolhatsz, mikrofon nélkül. Utána nézd meg a megoldást, és jelöld az eredményt.</p>`}</section>`;
-if(!s.revealed){const field=$('#response');field.focus();field.oninput=()=>s.answer=field.value;$('#hintButton').onclick=()=>{s.hint=true;render();};$('#checkButton').onclick=()=>{s.answer=field.value;s.revealed=true;render();};field.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#checkButton').click();}};}else{
+function renderSession(root){const s=session;if(s.index>=s.cards.length){renderSummary(root);return;}const card=s.cards[s.index],p=patternFor(card),result=s.revealed?evaluate(card,s.answer):null,task=exercisePrompt(card,s);root.innerHTML=`<section class="panel"><div class="intro"><span class="tag">${s.mode==='today'?'Mai gyakorlás':'Szabad gyakorlás'} · ${task.kind} · ${phaseName(card.form)}</span><span class="muted">${s.index+1} / ${s.cards.length}</span></div><div class="progress-track"><div style="width:${100*s.index/s.cards.length}%"></div></div><div class="prompt"><small>${escapeHtml(task.label)}</small><h2>${escapeHtml(task.prompt)}</h2><p>${escapeHtml(task.detail)}</p></div><label for="response" class="muted">A te mondatod</label><textarea id="response" class="response" placeholder="Írd be, vagy mondd ki hangosan…" ${s.revealed?'disabled':''}>${escapeHtml(s.answer)}</textarea>${s.hint?`<div class="feedback">Kapaszkodó: <strong>${escapeHtml(card.answer.split(' ').slice(0,2).join(' '))}…</strong></div>`:''}${s.revealed?`<div class="answer"><div class="answer-status ${result==='correct'?'answer-status-good':result==='minor'?'answer-status-minor':result==='unknown'?'answer-status-unknown':'answer-status-blank'}" role="status">${result==='correct'?'✓ Helyes a mondatod!':result==='minor'?'✎ Apró írásbeli eltérés':result==='unknown'?'ℹ Ezt a változatot nem ismerte fel az ellenőrző':'◉ A megoldás megtekintve'}</div><div class="muted">A rögzítendő mondat</div><strong>${escapeHtml(card.answer)}</strong><p>${escapeHtml(p.explanation)}</p><p class="note">${escapeHtml(explainAnswer(card,s.answer,result))}</p><button id="hear" class="secondary">🔊 Meghallgatom</button></div><h3>1. Milyen lett a válaszod?</h3><p class="muted">Te döntesz a helyességről. Az automatikus ellenőrzés csak támpont.</p><div class="choice assessment-choice">${[['correct','✓ Helyes'],['minor','✎ Apró elírás'],['structure','⚙ Szerkezeti hiba'],['other','↻ Más hiba']].map(([value,label])=>`<button type="button" data-assess-correct="${value}" class="${s.assessment.correctness===value?'selected':''}">${label}</button>`).join('')}</div><h3>2. Hogyan jutott eszedbe?</h3><div class="choice assessment-choice">${[['instant','⚡ Azonnal, önállóan'],['thought','🧠 Gondolkodva, önállóan'],['help','💡 Segítséggel'],['solution','📖 A megoldásból tanultam']].map(([value,label])=>`<button type="button" data-assess-recall="${value}" class="${s.assessment.recall===value?'selected':''}">${label}</button>`).join('')}</div><p class="detail">Az elírás nem ugyanaz, mint a mondatszerkezeti hiba. A bizonytalan vagy hibás mondat hamarabb visszatér.</p><button id="saveAssessment" ${!s.assessment.correctness||!s.assessment.recall?'disabled':''}>Értékelés mentése és tovább →</button>`:`<div class="actions"><button id="hintButton" class="secondary">Segítséget kérek</button><button id="checkButton">Megnézem a megoldást</button></div><p class="detail">Hangosan is válaszolhatsz, mikrofon nélkül. Utána nézd meg a megoldást, és jelöld az eredményt.</p>`}</section>`;
+if(!s.revealed){const field=$('#response');field.focus();field.oninput=()=>s.answer=field.value;$('#hintButton').onclick=()=>{s.hint=true;render();};$('#checkButton').onclick=()=>{s.answer=field.value;s.revealed=true;const result=evaluate(card,s.answer);s.assessment={correctness:result==='blank'?null:'correct',recall:s.hint?'help':result==='blank'?'solution':'instant'};render();};field.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#checkButton').click();}};}else{
   $('#hear').onclick=()=>speak(card.answer);
   document.querySelectorAll('[data-assess-correct]').forEach(b=>b.onclick=()=>{s.assessment.correctness=b.dataset.assessCorrect;render();});
   document.querySelectorAll('[data-assess-recall]').forEach(b=>b.onclick=()=>{s.assessment.recall=b.dataset.assessRecall;render();});
@@ -140,7 +150,6 @@ if(!s.revealed){const field=$('#response');field.focus();field.oninput=()=>s.ans
     if(!correctness||!recall)return;
     if(s.hint&&(recall==='instant'||recall==='thought')){alert('Kapaszkodót használtál, ezért a „Segítséggel” lehetőséget válaszd.');return;}
     if(correctness==='correct'&&result==='blank'){if(!confirm('Nem írtál be választ. Biztosan helyesen mondtad ki hangosan?'))return;}
-    if(correctness==='correct'&&result==='unknown'&&s.answer.trim()){if(!confirm('Az ellenőrző ezt a változatot nem ismerte fel. Ellenőrizted, hogy helyes?'))return;}
     gradeCard(card,correctness,recall);
     s.results.push({card:card.id,correctness,recall});
     if((correctness!=='correct'||recall!=='instant')&&(s.retries[card.id]||0)<2&&s.cards.length<s.maxQuestions){
