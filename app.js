@@ -1,4 +1,4 @@
-const CONTENT_REVISION = '20261031-ui-4';
+const CONTENT_REVISION = '20261031-lesson03-5';
 const CATALOG_URL = './data/index.json?v='+CONTENT_REVISION;
 const KEY = 'reflex-trener-progress-v1';
 const DAY = 86400000;
