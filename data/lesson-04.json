@@ -1,0 +1,232 @@
+{
+  "id": "past-choice-04",
+  "title": "Múlt idő tudatosan – Past Simple és Present Perfect",
+  "schemaVersion": 2,
+  "stages": [
+    {
+      "id": "meaning",
+      "type": "teach",
+      "title": "Mikor történt, vagy megtörtént-e?",
+      "intro": "Past Simple: lezárt múltbeli esemény, például yesterday vagy last week. Present Perfect: a múltbeli esemény jelenhez kapcsolódó eredménye vagy tapasztalata a fontos; nem adunk meg lezárt múltbeli időpontot. Az already és yet kapaszkodó, nem önmagában döntési szabály. Előbb olvasd el a mondatpárokat.",
+      "cardIds": [
+        "ps-meet-yesterday",
+        "pp-meet-already",
+        "ps-speak-last-night",
+        "pp-speak-before"
+      ]
+    },
+    {
+      "id": "negatives",
+      "type": "teach",
+      "title": "Még nem – és tegnap nem",
+      "requires": [
+        "meaning"
+      ],
+      "intro": "A 'még nem' tipikusan eddig meg nem történt esemény: haven't/hasn't + 3. alak, gyakran yet. A 'tegnap nem' meghatározott múlt: didn't + alapalak. Figyeld a speak–spoke–spoken, tell–told–told, see–saw–seen alakokat.",
+      "cardIds": [
+        "ps-not-see-yesterday",
+        "pp-not-see-yet",
+        "ps-tell-yesterday",
+        "pp-not-tell-yet"
+      ]
+    },
+    {
+      "id": "transfer",
+      "type": "teach",
+      "title": "Ugyanaz az ige, új helyzet",
+      "requires": [
+        "negatives"
+      ],
+      "intro": "Most más alanyokkal és helyzetekben alkalmazzuk ugyanazt a különbséget. A meet után nem kell to, a speak után személy előtt to áll.",
+      "cardIds": [
+        "ps-daniel-last-week",
+        "pp-daniel-before",
+        "ps-emma-call",
+        "pp-emma-call"
+      ]
+    },
+    {
+      "id": "mixed",
+      "type": "practice",
+      "title": "Vegyes mondatalkotás",
+      "requires": [
+        "transfer"
+      ],
+      "intro": "Már bemutatott mondatok véletlen sorrendben. Ne csak az időhatározót keresd: gondold végig, a mondat lezárt eseményt vagy a jelen szempontjából fontos tapasztalatot/eredményt fejez-e ki.",
+      "scope": "learned"
+    },
+    {
+      "id": "review",
+      "type": "review",
+      "title": "Késleltetett ismétlés",
+      "requires": [
+        "mixed"
+      ],
+      "intro": "A bizonytalan mondatok térjenek vissza később is; egy helyes válasz még nem jelent tartós tudást.",
+      "scope": "learned"
+    }
+  ],
+  "patterns": [
+    {
+      "id": "past-specific",
+      "group": "do",
+      "title": "Lezárt múltbeli esemény",
+      "base": "I met Emma yesterday.",
+      "meaning": "Tegnap találkoztam Emmával.",
+      "explanation": "Past Simple: a lezárt múltbeli eseményt mondjuk el. Yesterday/last week/last night konkrét múltbeli időt jelöl. Tagadás: didn't + alapalak.",
+      "examples": [
+        "I met Emma yesterday.",
+        "I spoke to Daniel last night.",
+        "I didn't see Lily yesterday."
+      ]
+    },
+    {
+      "id": "past-experience",
+      "group": "do",
+      "title": "Már megtörtént – tapasztalat",
+      "base": "I've already met Emma.",
+      "meaning": "Már találkoztam Emmával.",
+      "explanation": "Present Perfect: have/has + 3. alak. A találkozás megtörténtének ténye, jelenbeli jelentősége vagy tapasztalata fontos, nem egy meghatározott múltbeli időpont. Already gyakori, de nem kötelező.",
+      "examples": [
+        "I've already met Emma.",
+        "I've spoken to Daniel before.",
+        "Daniel has met Emma before."
+      ]
+    },
+    {
+      "id": "past-not-yet",
+      "group": "do",
+      "title": "Még nem történt meg",
+      "base": "I haven't seen Lily yet.",
+      "meaning": "Még nem láttam Lilyt.",
+      "explanation": "Present Perfect tagadás: haven't/hasn't + 3. alak; a yet gyakran a mondat végén áll. A 'még nem' az eddigi időszakra utal, nem egyetlen lezárt tegnapi eseményre.",
+      "examples": [
+        "I haven't seen Lily yet.",
+        "Emma hasn't told Daniel the truth yet.",
+        "Emma hasn't called me yet."
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "id": "ps-meet-yesterday",
+      "pattern": "past-specific",
+      "form": "statement",
+      "hu": "Tegnap találkoztam Emmával.",
+      "situation": "Egy tegnapi találkozásról számolsz be.",
+      "answer": "I met Emma yesterday."
+    },
+    {
+      "id": "pp-meet-already",
+      "pattern": "past-experience",
+      "form": "statement",
+      "hu": "Már találkoztam Emmával.",
+      "situation": "Azt mondod, hogy a találkozás már megtörtént; nem mondod meg, mikor.",
+      "answer": "I've already met Emma.",
+      "accepted": [
+        "I have already met Emma."
+      ]
+    },
+    {
+      "id": "ps-speak-last-night",
+      "pattern": "past-specific",
+      "form": "statement",
+      "hu": "Tegnap este beszéltem Daniellel.",
+      "situation": "Egy tegnap esti beszélgetésről számolsz be.",
+      "answer": "I spoke to Daniel last night."
+    },
+    {
+      "id": "pp-speak-before",
+      "pattern": "past-experience",
+      "form": "statement",
+      "hu": "Korábban már beszéltem Daniellel.",
+      "situation": "Azt közlöd, hogy van ilyen korábbi tapasztalatod.",
+      "answer": "I've spoken to Daniel before.",
+      "accepted": [
+        "I have spoken to Daniel before."
+      ]
+    },
+    {
+      "id": "ps-not-see-yesterday",
+      "pattern": "past-specific",
+      "form": "negative",
+      "hu": "Tegnap nem láttam Lilyt.",
+      "situation": "A tegnapi napról beszélsz.",
+      "answer": "I didn't see Lily yesterday.",
+      "accepted": [
+        "I did not see Lily yesterday."
+      ]
+    },
+    {
+      "id": "pp-not-see-yet",
+      "pattern": "past-not-yet",
+      "form": "negative",
+      "hu": "Még nem láttam Lilyt.",
+      "situation": "Eddig nem történt meg a találkozás.",
+      "answer": "I haven't seen Lily yet.",
+      "accepted": [
+        "I have not seen Lily yet."
+      ]
+    },
+    {
+      "id": "ps-tell-yesterday",
+      "pattern": "past-specific",
+      "form": "statement",
+      "hu": "Emma tegnap elmondta Danielnek az igazságot.",
+      "situation": "Megmondod, mikor történt a közlés.",
+      "answer": "Emma told Daniel the truth yesterday."
+    },
+    {
+      "id": "pp-not-tell-yet",
+      "pattern": "past-not-yet",
+      "form": "negative",
+      "hu": "Emma még nem mondta el Danielnek az igazságot.",
+      "situation": "Az igazság elmondása eddig nem történt meg.",
+      "answer": "Emma hasn't told Daniel the truth yet.",
+      "accepted": [
+        "Emma has not told Daniel the truth yet."
+      ]
+    },
+    {
+      "id": "ps-daniel-last-week",
+      "pattern": "past-specific",
+      "form": "statement",
+      "hu": "Múlt héten találkoztam Daniellel.",
+      "situation": "A múlt heti találkozást említed.",
+      "answer": "I met Daniel last week."
+    },
+    {
+      "id": "pp-daniel-before",
+      "pattern": "past-experience",
+      "form": "statement",
+      "hu": "Korábban már találkoztam Daniellel.",
+      "situation": "A korábbi találkozás tényét hangsúlyozod, időpont nélkül.",
+      "answer": "I've met Daniel before.",
+      "accepted": [
+        "I have met Daniel before."
+      ]
+    },
+    {
+      "id": "ps-emma-call",
+      "pattern": "past-specific",
+      "form": "negative",
+      "hu": "Emma tegnap nem hívott fel.",
+      "situation": "A tegnapi napról beszélsz.",
+      "answer": "Emma didn't call me yesterday.",
+      "accepted": [
+        "Emma did not call me yesterday."
+      ]
+    },
+    {
+      "id": "pp-emma-call",
+      "pattern": "past-not-yet",
+      "form": "negative",
+      "hu": "Emma még nem hívott fel.",
+      "situation": "Eddig nem érkezett meg a hívása.",
+      "answer": "Emma hasn't called me yet.",
+      "accepted": [
+        "Emma has not called me yet."
+      ]
+    }
+  ]
+}
