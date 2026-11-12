@@ -124,7 +124,9 @@
       "situation": "Daniel szeretne bemutatni Emmának. Mondd neki, hogy már találkoztál Emmával.",
       "answer": "I've already met Emma.",
       "accepted": [
-        "I have already met Emma."
+        "I have already met Emma.",
+        "I've met Emma before.",
+        "I have met Emma before."
       ]
     },
     {
@@ -133,7 +135,12 @@
       "form": "statement",
       "hu": "Tegnap este beszéltem Daniellel.",
       "situation": "Emma megkérdezi, kivel beszélgettél tegnap este. Mondd el, hogy Daniellel beszéltél tegnap este.",
-      "answer": "I spoke to Daniel last night."
+      "answer": "I spoke to Daniel last night.",
+      "accepted": [
+        "I talked to Daniel last night.",
+        "I spoke with Daniel last night.",
+        "I talked with Daniel last night."
+      ]
     },
     {
       "id": "pp-speak-before",
@@ -143,7 +150,13 @@
       "situation": "Emma azt kérdezi, ismered-e Daniel hangját. Mondd el, hogy korábban már beszéltél Daniellel.",
       "answer": "I've spoken to Daniel before.",
       "accepted": [
-        "I have spoken to Daniel before."
+        "I have spoken to Daniel before.",
+        "I've already spoken to Daniel.",
+        "I have already spoken to Daniel.",
+        "I've spoken with Daniel before.",
+        "I have spoken with Daniel before.",
+        "I've already spoken with Daniel.",
+        "I have already spoken with Daniel."
       ]
     },
     {
@@ -203,7 +216,9 @@
       "situation": "Egy barátod szeretne bemutatni Danielnek. Mondd el, hogy korábban már találkoztál Daniellel.",
       "answer": "I've met Daniel before.",
       "accepted": [
-        "I have met Daniel before."
+        "I have met Daniel before.",
+        "I've already met Daniel.",
+        "I have already met Daniel."
       ]
     },
     {
