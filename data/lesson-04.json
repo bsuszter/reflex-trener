@@ -113,7 +113,7 @@
       "pattern": "past-specific",
       "form": "statement",
       "hu": "Tegnap találkoztam Emmával.",
-      "situation": "Egy tegnapi találkozásról számolsz be.",
+      "situation": "Daniel megkérdezi, kivel találkoztál tegnap. Mondd el neki, hogy tegnap Emmával találkoztál.",
       "answer": "I met Emma yesterday."
     },
     {
@@ -121,7 +121,7 @@
       "pattern": "past-experience",
       "form": "statement",
       "hu": "Már találkoztam Emmával.",
-      "situation": "Azt mondod, hogy a találkozás már megtörtént; nem mondod meg, mikor.",
+      "situation": "Daniel szeretne bemutatni Emmának. Mondd neki, hogy már találkoztál Emmával.",
       "answer": "I've already met Emma.",
       "accepted": [
         "I have already met Emma."
@@ -132,7 +132,7 @@
       "pattern": "past-specific",
       "form": "statement",
       "hu": "Tegnap este beszéltem Daniellel.",
-      "situation": "Egy tegnap esti beszélgetésről számolsz be.",
+      "situation": "Emma megkérdezi, kivel beszélgettél tegnap este. Mondd el, hogy Daniellel beszéltél tegnap este.",
       "answer": "I spoke to Daniel last night."
     },
     {
@@ -140,7 +140,7 @@
       "pattern": "past-experience",
       "form": "statement",
       "hu": "Korábban már beszéltem Daniellel.",
-      "situation": "Azt közlöd, hogy van ilyen korábbi tapasztalatod.",
+      "situation": "Emma azt kérdezi, ismered-e Daniel hangját. Mondd el, hogy korábban már beszéltél Daniellel.",
       "answer": "I've spoken to Daniel before.",
       "accepted": [
         "I have spoken to Daniel before."
@@ -151,7 +151,7 @@
       "pattern": "past-specific",
       "form": "negative",
       "hu": "Tegnap nem láttam Lilyt.",
-      "situation": "A tegnapi napról beszélsz.",
+      "situation": "Daniel azt kérdezi, láttad-e tegnap Lilyt. Mondd el, hogy tegnap nem láttad Lilyt.",
       "answer": "I didn't see Lily yesterday.",
       "accepted": [
         "I did not see Lily yesterday."
@@ -162,7 +162,7 @@
       "pattern": "past-not-yet",
       "form": "negative",
       "hu": "Még nem láttam Lilyt.",
-      "situation": "Eddig nem történt meg a találkozás.",
+      "situation": "Daniel Lilyt keresi, és megkérdezi, láttad-e már. Mondd neki, hogy még nem láttad Lilyt.",
       "answer": "I haven't seen Lily yet.",
       "accepted": [
         "I have not seen Lily yet."
@@ -173,7 +173,7 @@
       "pattern": "past-specific",
       "form": "statement",
       "hu": "Emma tegnap elmondta Danielnek az igazságot.",
-      "situation": "Megmondod, mikor történt a közlés.",
+      "situation": "Egy barátod megkérdezi, mikor tudta meg Daniel az igazságot. Mondd el, hogy Emma tegnap elmondta Danielnek az igazságot.",
       "answer": "Emma told Daniel the truth yesterday."
     },
     {
@@ -181,7 +181,7 @@
       "pattern": "past-not-yet",
       "form": "negative",
       "hu": "Emma még nem mondta el Danielnek az igazságot.",
-      "situation": "Az igazság elmondása eddig nem történt meg.",
+      "situation": "Egy barátod azt kérdezi, tudja-e már Daniel az igazságot. Mondd el, hogy Emma még nem mondta el Danielnek az igazságot.",
       "answer": "Emma hasn't told Daniel the truth yet.",
       "accepted": [
         "Emma has not told Daniel the truth yet."
@@ -192,7 +192,7 @@
       "pattern": "past-specific",
       "form": "statement",
       "hu": "Múlt héten találkoztam Daniellel.",
-      "situation": "A múlt heti találkozást említed.",
+      "situation": "Emma megkérdezi, kivel találkoztál múlt héten. Mondd el, hogy múlt héten Daniellel találkoztál.",
       "answer": "I met Daniel last week."
     },
     {
@@ -200,7 +200,7 @@
       "pattern": "past-experience",
       "form": "statement",
       "hu": "Korábban már találkoztam Daniellel.",
-      "situation": "A korábbi találkozás tényét hangsúlyozod, időpont nélkül.",
+      "situation": "Egy barátod szeretne bemutatni Danielnek. Mondd el, hogy korábban már találkoztál Daniellel.",
       "answer": "I've met Daniel before.",
       "accepted": [
         "I have met Daniel before."
@@ -211,7 +211,7 @@
       "pattern": "past-specific",
       "form": "negative",
       "hu": "Emma tegnap nem hívott fel.",
-      "situation": "A tegnapi napról beszélsz.",
+      "situation": "Tegnap Emma telefonhívására vártál. Ma egy barátod megkérdezi, felhívott-e tegnap. Mondd el, hogy Emma tegnap nem hívott fel.",
       "answer": "Emma didn't call me yesterday.",
       "accepted": [
         "Emma did not call me yesterday."
@@ -222,7 +222,7 @@
       "pattern": "past-not-yet",
       "form": "negative",
       "hu": "Emma még nem hívott fel.",
-      "situation": "Eddig nem érkezett meg a hívása.",
+      "situation": "Emma hívására vársz. Daniel megkérdezi, felhívott-e már. Mondd el, hogy Emma még nem hívott fel.",
       "answer": "Emma hasn't called me yet.",
       "accepted": [
         "Emma has not called me yet."
